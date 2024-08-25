@@ -1,0 +1,19 @@
+package com.example.license.service;
+
+import com.example.license.data.Account;
+
+public interface IAccountService {
+
+    public void registerAccount(String accountName, String accountPass);
+
+    /**
+     * ユーザ名とパスワードをデータベースに照合する
+     *
+     * @param accountName ユーザーネーム
+     * @param accountPass パスワード
+     * @return 照合成功であれば<code>true</code>, 照合失敗は<code>false</code>
+     */
+    public boolean existsAccount(String accountName, String accountPass);
+
+    public Account termsFindAccount(String accountName, String accountPass);
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:wicket="http://wicket.apache.org">
+<head> <!--そもそも目に見える部分じゃないのがhead-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!--ビューデザイン幅を端末に合わせる-->
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <!--JavaScript ライブラリの読み込み-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script src="../js/scroll.js"></script>
+    <!--作成したJavaScriptファイルの読み込み-->
+    <script src="humberger.js"></script>
+    <title>Account</title>
+
+    <link rel="stylesheet" href="../css/kawamuraStyle.css">
+</head>
+<body>
+    <wicket:extend>
+        <div id="container">
+            <div id="contents">
+                <h3>予算変更・更新</h3>
+                <form action="#" wicket:id="budgetInfo">
+                    <table class="ta1">
+                        <tr>
+                            <th>予算名称</th><td><input type="text" wicket:id="budgetName"></td>
+                        </tr>
+                        <tr>
+                            <th>開始日</th><td><input type="date" wicket:id="budgetStartDate"></td>
+                        </tr>
+                        <tr><th>終了日</th><td><input type="date" wicket:id="budgetEndDate"></td>
+                        </tr>
+                        <!--
+                        <tr>
+                            <th>課</th><td><select wicket:id="sectionName"><option></option></select></td>
+                        </tr>
+                        -->
+                    </table>
+                    <button type="submit">更新</button>
+                    <div wicket:id="feedback"></div>
+                </form>
+            </div>
+        </div>
+    </wicket:extend>
+</body>
+</html>

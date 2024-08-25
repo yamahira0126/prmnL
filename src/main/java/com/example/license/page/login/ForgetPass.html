@@ -1,0 +1,28 @@
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+  <link rel="stylesheet" href="Forget.css">
+  <title>パスワード忘れ</title>
+</head>
+
+<body>
+<h1>パスワードをお忘れの方</h1>
+
+<div calss="form">
+  <form action="Comp.html" method="post" class="address-form">
+    <div class="form-mailaddress">
+      <label>
+        メールアドレス <br>
+        <input type="text" name="address" id="textAddress" required>
+      </label>
+    </div>
+    <div class="form-button">
+      <button type="submit" class="submit-button">送信</button>
+    </div>
+  </form>
+</div>
+
+<div class="back">
+  <button onclick="location.href='#'" wicket:id="toLogin">戻る</button>
+</div>
+</body>
+</html>

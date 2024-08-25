@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:wicket="http://wicket.apache.org">
+<head> <!--そもそも目に見える部分じゃないのがhead-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!--ビューデザイン幅を端末に合わせる-->
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <!--JavaScript ライブラリの読み込み-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script src="../js/scroll.js"></script>
+    <!--作成したJavaScriptファイルの読み込み-->
+    <script src="humberger.js"></script>
+    <title>Account</title>
+
+    <link rel="stylesheet" href="../css/kawamuraStyle.css">
+</head>
+
+<body>
+    <wicket:extend>
+        <section id="select">
+            <div id="container">
+                <div id="contents">
+                    <h2>Budget</h2>
+                    <h3>予算一覧</h3>
+                    <table class="ta1">
+                        <thead>
+                        <tr>
+                            <th>予算ID</th>
+                            <th>予算名称</th>
+                            <th>開始日</th>
+                            <th>終了日</th>
+                            <th>編集</th>
+                            <th>削除</th>
+                        </tr>
+                        </thead>
+                        <tbody wicket:id="budgets">
+                        <tr>
+                            <td><span wicket:id="budgetId">1</span></td>
+                            <td><span wicket:id="budgetName">学生支援課Excel</span></td>
+                            <td><span wicket:id="budgetStartDate">2024/04/01</span></td>
+                            <td><span wicket:id="budgetEndDate">2025/03/31</span></td>
+                            <td><a href="#make" wicket:id="toUpdateBudget">※</a></td>
+                            <td><a href="#">※</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a href="#make" wicket:id="toMakeBudget">＋</a>
+                </div>
+            </div>
+        </section>
+        <section id="make">
+            <wicket:child/>
+        </section>
+    </wicket:extend>
+</body>
+</html>

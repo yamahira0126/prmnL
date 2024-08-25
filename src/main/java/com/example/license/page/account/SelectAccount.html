@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:wicket="http://wicket.apache.org">
+<head> <!--そもそも目に見える部分じゃないのがhead-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!--ビューデザイン幅を端末に合わせる-->
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <!--JavaScript ライブラリの読み込み-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script src="../js/scroll.js"></script>
+    <!--作成したJavaScriptファイルの読み込み-->
+    <script src="humberger.js"></script>
+    <title>Account</title>
+
+    <link rel="stylesheet" href="../css/kawamuraStyle.css">
+</head>
+<body>
+    <wicket:extend>
+        <section id="select">
+            <div id="container">
+                <div id="contents">
+                    <h2>Account</h2>
+                    <h3>アカウント一覧</h3>
+                    <table class="ta1">
+                        <thead>
+                        <tr>
+                            <th>＃</th>
+                            <th>id</th>
+                            <th>名称</th>
+                            <th>メールアドレス</th>
+                            <th>パスワード</th>
+                            <th>課</th>
+                            <th>編集</th>
+                            <th>削除</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><span>011</span></td>
+                            <td><span>山平竜世</span></td>
+                            <td><span>b2222490</span></td>
+                            <td><span>KABENOBORI</span></td>
+                            <td><span>学生支援課</span></td>
+                            <td><form><button type="submit">※</button></form></td>
+                            <td><a href="#">※</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a href="#make" wicket:id="toMake">＋</a>
+                </div>
+            </div>
+        </section>
+        <section id="make">
+            <wicket:child/>
+        </section>
+    </wicket:extend>
+</body>
+</html>
