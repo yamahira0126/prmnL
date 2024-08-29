@@ -31,8 +31,6 @@ public class MakeBudget extends SelectBudget {
         Model<Date> budgetStartDateModel = Model.of();
         Model<Date> budgetEndDateModel = Model.of();
 
-        var renderer = new ChoiceRenderer<>("sectionName");
-
         var budgetInfoForm = new Form<>("budgetInfo") {
             @Override
             protected void onSubmit() {
