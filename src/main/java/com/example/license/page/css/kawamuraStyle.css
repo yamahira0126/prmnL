@@ -675,6 +675,34 @@ ul.disc {padding: 0em 25px 15px 40px;list-style: disc;}
     background-color: darkred; /* ホバー時の背景色を暗い赤に設定 */
 }
 
+.registration-button {
+    width: 100px;
+    height: 40px;
+    color: white; /* テキストの色を白に設定 */
+    background-color: blue; /* 背景色を赤に設定 */
+    border: none; /* ボーダーを無しに設定 */
+    padding: 10px 20px; /* 内側余白の設定 */
+    margin-left: 15px;  /* 外側余白の設定 */
+    margin-top: 15px;
+    font-size: 16px; /* フォントサイズの設定 */
+    cursor: pointer; /* カーソルをポインタに設定 */
+    transition: background-color 0.3s; /* ホバー時の背景色の変化をスムーズに */
+}
+
+.update-button {
+    width: 100px;
+    height: 40px;
+    color: white; /* テキストの色を白に設定 */
+    background-color: orange; /* 背景色を赤に設定 */
+    border: none; /* ボーダーを無しに設定 */
+    padding: 10px 20px; /* 内側余白の設定 */
+    margin-left: 15px;  /* 外側余白の設定 */
+    margin-top: 15px;
+    font-size: 16px; /* フォントサイズの設定 */
+    cursor: pointer; /* カーソルをポインタに設定 */
+    transition: background-color 0.3s; /* ホバー時の背景色の変化をスムーズに */
+}
+
 
 
 
