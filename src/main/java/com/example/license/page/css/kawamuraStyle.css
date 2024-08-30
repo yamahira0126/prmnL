@@ -196,7 +196,7 @@ header #logo img {
     left: 0;
     width: 30px;
     height: 2px;
-    background-color: #FFFFFF;
+    background-color: #f8b500;
     border-radius: 4px;
     transition: all .5s;
 }
@@ -471,17 +471,18 @@ dl dt::before {
 .ta1 {
     table-layout: fixed;
     width: 100%;
-    margin: 0 auto 20px;
+    height: 1%;
+    margin-bottom: 60px;
 }
 .ta1, .ta1 td, .ta1 th {
     word-break: break-all;
-    border: 1px solid #fff;	/*テーブルの枠線の幅、線種、色*/
-    padding: 10px;			/*テーブル内の余白*/
+    border: 1px solid #cccccc;	/*テーブルの枠線の幅、線種、色*/
+    padding: 5px;			/*テーブル内の余白*/
 }
 /*テーブルの左側ボックス*/
 .ta1 th {
     text-align: center;	/*センタリング*/
-    width: 30%;			/*幅*/
+    width: 10%;			/*幅*/
 }
 
 
@@ -627,6 +628,56 @@ ul.disc {padding: 0em 25px 15px 40px;list-style: disc;}
 .sh {display: none;}
 
 
+/*Budgetの部分
+    ---------------------------------------------------------------------------*/
+
+/*DeleteBudget.htmlの部分*/
+.ta2 {
+    width: 100%; /* テーブルの幅を100%に設定 */
+}
+.ta2 table{
+    width: 100%; /* テーブルの幅を100%に設定 */
+    border: none; /* 各セルの枠線を消す */
+}
+.ta2 th {
+    text-align: left; /* 左寄せに設定 */
+    padding: 10px; /* パディングを追加 */
+    border: none; /* 各セルの枠線を消す */
+}
+.ta2 td {
+    padding: 0px; /* パディングを追加 */
+    border: none; /* 各セルの枠線を消す */
+}
+.ta2 input {
+    width: 100%; /* 幅を100%に設定してセル全体を使う */
+    height: 40px; /* 高さを設定して大きくする */
+    font-size: 16px; /* フォントサイズを設定 */
+    padding: 0px; /* 内側の余白を設定 */
+    box-sizing: border-box; /* ボックスモデルを設定 */
+    background-color: #002a7e;
+}
+
+.delete-button {
+    width: 100px;
+    height: 40px;
+    color: white; /* テキストの色を白に設定 */
+    background-color: red; /* 背景色を赤に設定 */
+    border: none; /* ボーダーを無しに設定 */
+    padding: 10px 20px; /* 内側余白の設定 */
+    margin-left: 15px;  /* 外側余白の設定 */
+    margin-top: 15px;
+    font-size: 16px; /* フォントサイズの設定 */
+    cursor: pointer; /* カーソルをポインタに設定 */
+    transition: background-color 0.3s; /* ホバー時の背景色の変化をスムーズに */
+}
+
+.delete-button:hover {
+    background-color: darkred; /* ホバー時の背景色を暗い赤に設定 */
+}
+
+
+
+
 
 
 /*画面幅800px以下の設定
@@ -695,6 +746,9 @@ ul.disc {padding: 0em 25px 15px 40px;list-style: disc;}
     ---------------------------------------------------------------------------*/
     .ws {width: 96%;}
     /*.big1 {font-size: 22px;letter-spacing: normal;}*/
+
+
+
 
 
 
