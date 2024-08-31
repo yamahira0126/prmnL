@@ -31,6 +31,8 @@ public class MakeBudget extends SelectBudget {
         Model<Date> budgetStartDateModel = Model.of();
         Model<Date> budgetEndDateModel = Model.of();
 
+        var renderer = new ChoiceRenderer<>("sectionName");
+
         var budgetInfoForm = new Form<>("budgetInfo") {
             @Override
             protected void onSubmit() {
@@ -94,6 +96,22 @@ public class MakeBudget extends SelectBudget {
             }
         };
         budgetInfoForm.add(budgetEndDateField);
+
+//        プルダウン
+//        var sectionSelection = new DropDownChoice<>("sectionName", selectedModel, selectionModel, renderer) {
+//            @Override
+//            protected void onInitialize() {
+//                // このDropDownChoiceの初期化用の処理
+//                super.onInitialize();
+//                // 必ず空欄の選択肢を用意するように設定
+//                setNullValid(true);
+//                // 空欄の選択肢の送信を許可しないバリデーション
+//                //setRequired(true);
+//                // エラーメッセージに表示する名前を設定
+//                setLabel(Model.of("課の選択肢"));
+//            }
+//        };
+//        budgetInfoForm.add(sectionSelection);
 
         var feedback = new FeedbackPanel("feedback");
         budgetInfoForm.add(feedback);
