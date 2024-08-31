@@ -2,6 +2,7 @@
 package com.example.license.page.software;
 
 import com.example.license.data.Software;
+import com.example.license.service.ISectionService;
 import com.example.license.service.ISoftwareService;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -15,15 +16,14 @@ public class UpdateSoftware extends SelectSoftware {
 
     @SpringBean
     private ISoftwareService softwareService;
+    @SpringBean
+    private ISectionService sectionService;
     public UpdateSoftware(Software selectedSoftware){
         //入力のためのモデル
         var softwareNameModel = Model.of("");
         var softwareTypeModel = Model.of("");
         var totalNumberModel = Model.of("");
         var softwareRemarksModel = Model.of("");
-
-        var selectionModel = LoadableDetachableModel.of(() -> softwareService.findSoftwares());
-        var selectedModel = new Model<Software>();
 
         var renderer = new ChoiceRenderer<>("softwareName");
 
@@ -35,12 +35,19 @@ public class UpdateSoftware extends SelectSoftware {
                 var totalNumber = totalNumberModel.getObject();
                 var softwareRemarks = softwareRemarksModel.getObject();
 
-                var msg = "送信データ" + softwareName + softwareType + totalNumber + softwareRemarks;
+                var msg = "送信データ"
+                        + softwareName
+                        +","
+                        + softwareType
+                        +","
+                        + totalNumber
+                        +","
+                        + softwareRemarks;
                 System.out.println(msg);
 
 
                 softwareService.renewal(selectedSoftware.getSoftwareName(), softwareName, softwareType, totalNumber, softwareRemarks);
-                setResponsePage(MakeSoftware.class);
+                setResponsePage(new MakeSoftware());
             }
         };
         add(softwareInfoForm);
@@ -49,8 +56,8 @@ public class UpdateSoftware extends SelectSoftware {
             @Override
             protected void onInitialize() {
                 // このDropDownChoiceの初期化用の処理
-                super.onInitialize();
                 setModelObject(selectedSoftware.getSoftwareName());
+                super.onInitialize();
                 // 空欄の選択肢の送信を許可しないバリデーション
                 setRequired(true);
                 // エラーメッセージに表示する名前を設定
@@ -97,7 +104,7 @@ public class UpdateSoftware extends SelectSoftware {
         };
         softwareInfoForm.add(softwareRemarksField);
 
-        var softwareSelection = new DropDownChoice<>("softwareSelection", selectedModel,selectionModel,renderer){
+        /*var softwareSelection = new DropDownChoice<>("softwareSelection", selectedModel,selectionModel,renderer){
             @Override
             protected void onInitialize() {
                 // このDropDownChoiceの初期化用の処理
@@ -108,7 +115,7 @@ public class UpdateSoftware extends SelectSoftware {
                 setLabel(Model.of("課の選択肢"));
             }
         };
-        softwareInfoForm.add(softwareSelection);
+        softwareInfoForm.add(softwareSelection);*/
 
         var feedback = new FeedbackPanel("feedback");
         softwareInfoForm.add(feedback);
