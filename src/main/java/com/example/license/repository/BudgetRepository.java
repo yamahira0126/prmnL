@@ -40,6 +40,14 @@ public class BudgetRepository implements IBudgetRepository{
     }
 
     @Override
+    public int delete(Integer selectedBudgetId) {
+        var sql = "update budget_table set budget_exist = ? where budget_id = ?";
+        var n = jdbc.update(sql, 0, selectedBudgetId);
+        return n;
+    }
+
+    //使ってない
+    @Override
     public List<Budget> find() {
         String sql = "select * from budget_table";
 
@@ -51,14 +59,15 @@ public class BudgetRepository implements IBudgetRepository{
     @Override
     public List<Budget> find(Account account) {
         var accountId = account.getAccountId();
-        //accountId=sectionId=budgetIdで検索
+        //accountId=sectionId=budgetIdかつbudget_exist=1で検索
         String sql = "select budget_table.budget_id, budget_name, budget_start_date, budget_end_date"
                         + " from account_section_table"
                         + " inner join budget_section_table"
                         + " on account_section_table.section_id = budget_section_table.section_id"
                         + " inner join budget_table"
                         + " on budget_table.budget_id = budget_section_table.budget_id"
-                        + " where account_id = ?";
+                        + " where account_id = ?"
+                        + " and budget_exist = 1";
         List<Budget> budgets = jdbc.query(sql, DataClassRowMapper.newInstance(Budget.class), accountId);
         return budgets;
     }

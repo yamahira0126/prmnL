@@ -34,7 +34,7 @@ public class UpdateBudget extends SelectBudget {
 //        var selectionModel = LoadableDetachableModel.of(() -> sectionService.findSections());
 //        var selectedModel = new Model<Section>();
 
-        var renderer = new ChoiceRenderer<>("sectionName");
+        //var renderer = new ChoiceRenderer<>("sectionName");
 
         var budgetInfoForm = new Form<>("budgetInfo") {
             @Override
@@ -55,7 +55,7 @@ public class UpdateBudget extends SelectBudget {
 
                 //変更
                 budgetService.renewal(selectedBudeget.getBudgetName(), budgetName, budgetStartDate, budgetEndDate);
-                setResponsePage(new MakeBudget());
+                setResponsePage(new SelectBudget());
             };
         };
         add(budgetInfoForm);

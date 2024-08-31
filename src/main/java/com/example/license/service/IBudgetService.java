@@ -13,6 +13,7 @@ public interface IBudgetService {
     public void registerBudget(String budgetName, Date budgetStartDate, Date budgetEndDate, Account account);
 
     public void renewal(String selectedBudgetName, String budgetName, Date budgetStartDate, Date budgetEndDate);
+    public void deleteBudget(Integer selectedBudgetId);
     public List<Budget> findBudgets();
     public List<Budget> findBudgets(Account account);
 }

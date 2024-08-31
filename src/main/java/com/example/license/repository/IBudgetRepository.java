@@ -10,7 +10,7 @@ public interface IBudgetRepository {
     public Integer insert(String budgetName, Date budgetStartDate, Date budgetEndDate);
 
     public int change(String selectedBudgetName, String budgetName, Date budgetStartDate, Date budgetEndDate);
-
+    public int delete(Integer selectedBudgetId);
     public List<Budget> find();
     public List<Budget> find(Account account);
 }

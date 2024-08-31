@@ -53,7 +53,13 @@ public class BudgetService implements IBudgetService{
         System.out.println("記録行数：" + n);
     }
 
-    //budget_tableの情報をすべてListに保持させる
+    @Override
+    public void deleteBudget(Integer selectedBudgetId) {
+        int n = budgetRepos.delete(selectedBudgetId);
+        System.out.println("記録行数：" + n);
+    }
+
+    //budget_tableの情報をすべてListに保持させる　使ってない
     @Override
     public List<Budget> findBudgets() {
         var budgets = budgetRepos.find();
