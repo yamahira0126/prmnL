@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:wicket="http://wicket.apache.org">
+<html lang="ja" xmlns:wicket="http://wicket.apache.org" xmlns="http://www.w3.org/1999/html">
 <head> <!--そもそも目に見える部分じゃないのがhead-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"> <!--ビューデザイン幅を端末に合わせる-->
@@ -17,17 +17,16 @@
     <!--作成したJavaScriptファイルの読み込み-->
     <script src="humberger.js"></script>
     <title>システムライセンス管理チーム Cist License management</title>
-
     <link rel="stylesheet" href="../css/kawamuraStyle.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 <header id="header">
 
-
     <h1 id="logo"><a href="HomePage.html"><img src="../css/phonto.PNG" wicket:id="logo" alt="CIST License Management"></a></h1>
     <h2 class="site-title"></h2>
-    <h2><a href="HomePage.html">こんにちは、＜<span wicket:id="loginName"></span>＞さん</a></h2>
+    <h2 class="user-title"><a href="HomePage.html">&nbsp;こんにちは、＜<span wicket:id="loginName"></span>＞さん</a></h2>
     <nav id="navi">
         <ul class="nav-menu">
             <li><a href="#saisho">はじめての方へ</a></li>
@@ -47,6 +46,7 @@
             <li><a href="#" target="_blank" wicket:id="logout">ログアウト</a></li>
         </ul>
     </nav>
+
     <div class="toggle_btn">
         <span></span>
         <span></span>
@@ -55,106 +55,155 @@
 
     <nav id="menubar">
         <ul>
-            <li><a href="#activitylog">アクティビティログ</a></li>
             <li><a href="#License">ライセンス</a></li>
+            <li><a href="#activitylog">アクティビティログ</a></li>
             <li><a href="#yosan">予算</a></li>
             <li><a href="#account">アカウント管理</a></li>
         </ul>
     </nav>
 </header>
-    <div id="container">
-        <div id="contents">
-            <section id="activitylog">
+<div id="container">
+    <div id="contents">
 
-                <h2>Activity log</h2>
-                <dl>
-                    <dt>2023/10/06<span class="newicon">NEW</span></dt>
-                    <dd>学生支援課がコード:11392のライセンス「B202教室_Word」のライセンスの削除。<br></dd>
-                    <dt>2021/12/15</dt>
-                    <dd>JSも少し書いてみた。</dd>
-                    <dt>2020/09/27</dt>
-                    <dd>ああああああああああああああ</dd>
-                    <dt>20XX/00/00</dt>
-                    <dd>やっほう！</dd>
-                </dl>
+        <section id="License">
+            <h2>License</h2>
+            <h3>登録されているライセンス</h3>
+            <table class="ta1">
+                <caption>ライセンス期限が近いもの</caption>
+                <tr>
+                    <th>コード</th>
+                    <td>ライセンス名</td>
+                    <td>管理者</td>
+                    <td>期限日</td>
+                </tr>
+                <tr>
+                    <th>コード</th>
+                    <td>ライセンス名</td>
+                    <td>管理者</td>
+                    <td>期限日</td>
+                </tr>
+                <tr>
+                    <th>コード</th>
+                    <td>ライセンス名</td>
+                    <td>管理者</td>
+                    <td>期限日</td>
+                </tr>
+                <tr>
+                    <th>コード</th>
+                    <td>ライセンス名</td>
+                    <td>管理者</td>
+                    <td>期限日</td>
+                </tr>
+                <tr>
+                    <th>コード</th>
+                    <td>ライセンス名</td>
+                    <td>管理者</td>
+                    <td>期限日</td>
+                </tr>
+                <tr>
+                    <th>コード</th>
+                    <td>ライセンス名</td>
+                    <td>管理者</td>
+                    <td>期限日</td>
+                </tr>
+            </table>
+
+            <section>
+                <h3><a href="MakeLicense.html" class="newLicense">新規追加はこちらから</a></h3>
             </section>
-            <!--/#new-->
+        </section>
 
-            <section id="License">
-                <h2>License</h2>
-                <h3>登録されているライセンス</h3>
-                <table class="ta1">
-                    <caption>ライセンス期限が近いもの</caption>
-                    <tr>
-                        <th>コード</th>
-                        <td>ライセンス名</td>
-                        <td>管理者</td>
-                        <td>期限日</td>
-                    </tr>
-                    <tr>
-                        <th>コード</th>
-                        <td>ライセンス名</td>
-                        <td>管理者</td>
-                        <td>期限日</td>
-                    </tr>
-                    <tr>
-                        <th>コード</th>
-                        <td>ライセンス名</td>
-                        <td>管理者</td>
-                        <td>期限日</td>
-                    </tr>
-                    <tr>
-                        <th>コード</th>
-                        <td>ライセンス名</td>
-                        <td>管理者</td>
-                        <td>期限日</td>
-                    </tr>
-                    <tr>
-                        <th>コード</th>
-                        <td>ライセンス名</td>
-                        <td>管理者</td>
-                        <td>期限日</td>
-                    </tr>
-                    <tr>
-                        <th>コード</th>
-                        <td>ライセンス名</td>
-                        <td>管理者</td>
-                        <td>期限日</td>
-                    </tr>
-                </table>
+        <section id="activitylog">
 
-                <section id="yosan">
+            <h2>Activity log</h2>
+            <dl>
+                <dt>2023/10/06<span class="newicon">NEW</span></dt>
+                <dd>学生支援課がコード:11392のライセンス「B202教室_Word」のライセンスの削除。<br></dd>
+                <dt>2021/12/15</dt>
+                <dd>JSも少し書いてみた。</dd>
+                <dt>2020/09/27</dt>
+                <dd>ああああああああああああああ</dd>
+                <dt>20XX/00/00</dt>
+                <dd>やっほう！</dd>
+            </dl>
+        </section>
+        <!--/#new-->
 
-                    <h2>予算</h2>
+        <section id="yosan">
+            <h2>予算</h2>
+            <h3>予算の残り</h3>
+            <div class="chart-wrapper">
+                <canvas id="budgetChart" width="30" height="30"></canvas> <!-- サイズを指定 -->
+                <div class="legend">
+                    <span style="color: #007bff;">■ 使用済み</span>: 70%<br>
+                    <span style="color: #e0e0e0;">■ 残り予算</span>: 30%
+                </div>
+            </div>
+            <script>
+                const ctx = document.getElementById('budgetChart').getContext('2d');
+                const budgetChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['使用済み', '残り予算'],
+                        datasets: [{
+                            data: [70, 30], // 使用済みと残り予算の割合
+                            backgroundColor: [
+                                '#007bff', // 使用済み（青色）
+                                '#e0e0e0'  // 残り予算（薄い灰色）
+                            ],
+                            borderWidth: 1,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        return tooltipItem.label + ': ' + tooltipItem.raw + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            </script>
+        </section>
+            <!--/#service-->
 
-                </section>
-                <!--/#service-->
+            <!-- Font Awesome の CDN を読み込む（headタグ内に追加） -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-                <section id="account">
-
-                    <h2>アカウント管理</h2>
-                    <p class="c">不具合がありましたらこちらお願いします。</p>
-                    <p class="c"><span class="big1">b2220760@photon.chitose.ac.jpg</span>
-                </section>
-                <!--/#contact-->
+            <section id="account">
+                <h2>アカウント管理</h2>
+                <p class="c">不具合がありましたらこちらお願いします。</p>
+                <p class="c">
+                    <a href="mailto:cistlicense@gmail.com" class="email-link">
+                        <i class="fas fa-envelope"></i> <!-- メールアイコン -->
+                        cistlicense@gmail.com
+                    </a>
+                </p>
             </section>
-
-        </div>
-        <!--/#contents-->
-
+            <!--/#contact-->
     </div>
-    <!--/#container-->
+    <!--/#contents-->
 
-    <!--<footer>-->
-    <!--    <small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>-->
-    <!--    <span class="pr">《<a href="https://template-party.com/" target="_blank">Web Design:Template-Party</a>》</span>-->
-    <!--</footer>-->
+</div>
+<!--/#container-->
 
-    <!--jQueryファイルの読み込み-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!--<footer>-->
+<!--    <small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>-->
+<!--    <span class="pr">《<a href="https://template-party.com/" target="_blank">Web Design:Template-Party</a>》</span>-->
+<!--</footer>-->
 
-    <!--ページの上部へ戻るボタンとスクリプト-->
-    <p class="scroll"><a href="#">↑</a></p>
-    <script src="js/scroll.js"></script>
+<!--jQueryファイルの読み込み-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!--ページの上部へ戻るボタンとスクリプト-->
+<p class="scroll"><a href="#">↑</a></p>
+<script src="js/scroll.js"></script>
 </body>
 </html>

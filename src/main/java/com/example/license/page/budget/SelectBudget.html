@@ -22,13 +22,38 @@
 </head>
 
 <body>
+<nav id="navi">
+    <ul class="nav-menu">
+        <li><a href="#saisho">はじめての方へ</a></li>
+        <li><a href="#home" wicket:id="toHome">ホーム</a></li>
+        <li><a href="#select" wicket:id="toBudget">予算</a></li>
+        <li><a href="#select" wicket:id="toTerminal">端末</a></li>
+        <li><a href="#select" wicket:id="toSoftware">ソフトウェア</a></li>
+        <li><a href="#License">ライセンス</a></li>
+        <li><a href="#activitylog">アクティビティログ</a></li>
+        <li><a href="#account">アカウント管理</a></li>
+    </ul>
+
+    <ul class="nav-sun">
+        <li><a href="https://youtu.be/YYCaJQ_8ImI?si=KdFZ93pCcBxioEE2" target="_blank">マイページ設定</a></li>
+        <li><a href="https://youtu.be/weYtEthD0kw?si=tGbGkszwRWt3gV_L" target="_blank">お問い合わせ</a></li>
+        <li><a href="#" target="_blank" wicket:id="logout">ログアウト</a></li>
+    </ul>
+</nav>
+
+<div class="toggle_btn">
+    <span></span>
+    <span></span>
+    <span></span>
+</div><div id="mask"></div>
+
     <wicket:extend>
         <section id="select">
             <div id="container">
                 <div id="contents">
                     <h2>Budget</h2>
                     <h3>予算一覧</h3>
-                    <table class="ta1">
+                    <table class="ta2">
                         <thead>
                         <tr>
                             <th>予算ID</th>
