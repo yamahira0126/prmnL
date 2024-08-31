@@ -1,6 +1,7 @@
 package com.example.license.page.license;
 
 
+import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.form.upload.FileUpload;
@@ -35,7 +36,6 @@ public class MakeLicense extends SelectLicense{
                 var accountId = accountIdModel.getObject();
                 var serialCode = serialCodeModel.getObject();
                 var licenseNumber = licenseNumberModel.getObject();
-                File licenseRemarks = licenseRemarksModel.getObject();
 
                 var msg = "送信データ"
                         + softwareId
@@ -47,6 +47,8 @@ public class MakeLicense extends SelectLicense{
                         + serialCode
                         + licenseNumber;
                 System.out.println(msg);
+
+                setResponsePage(new MakeLicense());
             }
         };
         add(licenseInfoForm);
@@ -64,7 +66,7 @@ public class MakeLicense extends SelectLicense{
         };
         licenseInfoForm.add(softwareIdField);
 
-        var licenseStartDateField = new TextField<>("licenseStartDate", licenseStartDateModel) {
+        var licenseStartDateField = new DateTextField("licenseStartDate", licenseStartDateModel, "yyyy-MM-dd"){
             @Override
             protected void onInitialize() {
                 // このDropDownChoiceの初期化用の処理
@@ -77,7 +79,7 @@ public class MakeLicense extends SelectLicense{
         };
         licenseInfoForm.add(licenseStartDateField);
 
-        var licenseEndDateField = new TextField<>("licenseEndDate", licenseEndDateModel) {
+        var licenseEndDateField = new DateTextField("licenseEndDate", licenseEndDateModel, "yyyy-MM-dd"){
             @Override
             protected void onInitialize() {
                 // このDropDownChoiceの初期化用の処理
