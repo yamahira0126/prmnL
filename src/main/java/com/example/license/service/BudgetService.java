@@ -2,7 +2,7 @@ package com.example.license.service;
 
 import com.example.license.data.Account;
 import com.example.license.data.Budget;
-import com.example.license.data.Section;
+//import com.example.license.data.Section;
 import com.example.license.repository.IAccountSectionRepository;
 import com.example.license.repository.IBudgetRepository;
 import com.example.license.repository.IBudgetSectionRepository;
@@ -60,12 +60,12 @@ public class BudgetService implements IBudgetService{
     }
 
     //budget_tableの情報をすべてListに保持させる　使ってない
-    @Override
-    public List<Budget> findBudgets() {
-        var budgets = budgetRepos.find();
-        System.out.println("データ件数 findBudgets()：" + budgets.size());
-        return budgets;
-    }
+//    @Override
+//    public List<Budget> findBudgets() {
+//        var budgets = budgetRepos.find();
+//        System.out.println("データ件数 findBudgets()：" + budgets.size());
+//        return budgets;
+//    }
 
     //budget_tableのaccountに関係した情報をListに保持させる
     @Override

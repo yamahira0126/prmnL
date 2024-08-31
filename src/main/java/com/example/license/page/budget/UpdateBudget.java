@@ -2,13 +2,13 @@
 package com.example.license.page.budget;
 
 import com.example.license.data.Budget;
-import com.example.license.data.Section;
+//import com.example.license.data.Section;
 import com.example.license.service.IBudgetService;
-import com.example.license.service.ISectionService;
+//import com.example.license.service.ISectionService;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
-import org.apache.wicket.model.LoadableDetachableModel;
+//import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
@@ -21,8 +21,8 @@ public class UpdateBudget extends SelectBudget {
 
     @SpringBean
     private IBudgetService budgetService;
-    @SpringBean
-    private ISectionService sectionService;
+//    @SpringBean
+//    private ISectionService sectionService;
 
     public UpdateBudget(Budget selectedBudeget) {
         //入力のためのモデル
@@ -56,7 +56,7 @@ public class UpdateBudget extends SelectBudget {
                 //変更
                 budgetService.renewal(selectedBudeget.getBudgetName(), budgetName, budgetStartDate, budgetEndDate);
                 setResponsePage(new SelectBudget());
-            };
+            }
         };
         add(budgetInfoForm);
 
