@@ -1,12 +1,14 @@
 package com.example.license.page.software;
 
 
+import com.example.license.MySession;
 import com.example.license.data.Software;
 import com.example.license.page.common.MainMenu;
 import com.example.license.service.ISoftwareService;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.Model;
@@ -20,7 +22,7 @@ public class SelectSoftware extends MainMenu {
     private ISoftwareService softwareService;
     public SelectSoftware(){
         //softwareのデータが入ったリストのモデルを用意
-        var softwaresModel = Model.ofList(softwareService.findSoftwares());
+        var softwaresModel = Model.ofList(softwareService.findSoftwares(MySession.get().getAccount()));
 
         //ListView
         var softwaresLV = new ListView<>("softwares",softwaresModel){
@@ -50,9 +52,9 @@ public class SelectSoftware extends MainMenu {
                 var softwareremarksLabel = new Label("softwareRemarks", softwareRemarksModel);
                 listItem.add(softwareremarksLabel);
 
-                var toUpdateSoftware = new Form<>("toUpdateSoftware"){
+                var toUpdateSoftware = new Link<>("toUpdateSoftware"){
                     @Override
-                    protected void onSubmit() {
+                    public void onClick() {
                         setResponsePage(new UpdateSoftware(software));
                     }
                 };

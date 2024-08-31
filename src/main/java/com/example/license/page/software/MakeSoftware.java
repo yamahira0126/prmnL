@@ -1,6 +1,10 @@
 package com.example.license.page.software;
 
+import com.example.license.MySession;
 import com.example.license.data.Software;
+import com.example.license.page.budget.MakeBudget;
+import com.example.license.repository.ISoftwareSectionRepository;
+import com.example.license.service.ISectionService;
 import com.example.license.service.ISoftwareService;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
@@ -18,15 +22,14 @@ public class MakeSoftware extends SelectSoftware {
 
     @SpringBean
     private ISoftwareService softwareService;
+    @SpringBean
+    private ISectionService sectionService;
     public MakeSoftware(){
         //入力のためのモデル
         var softwareNameModel = Model.of("");
         var softwareTypeModel = Model.of("");
         var totalNumberModel = Model.of("");
         var softwareRemarksModel = Model.of("");
-
-        var selectionModel = LoadableDetachableModel.of(() -> softwareService.findSoftwares());
-        var selectedModel = new Model<Software>();
 
         var renderer = new ChoiceRenderer<>("softwareName");
 
@@ -38,12 +41,21 @@ public class MakeSoftware extends SelectSoftware {
                 var totalNumber = totalNumberModel.getObject();
                 var softwareRemarks = softwareRemarksModel.getObject();
 
-                var msg = "送信データ" + softwareName + softwareType + totalNumber + softwareRemarks;
+                var msg = "送信データ"
+                        + softwareName
+                        +","
+                        + softwareType
+                        +","
+                        + totalNumber
+                        +","
+                        + softwareRemarks;
                 System.out.println(msg);
 
 
-                softwareService.registerSoftware(softwareName, softwareType, totalNumber, softwareRemarks);
-                setResponsePage(MakeSoftware.class);
+                //変更点
+                //softwareService.registerSoftware(softwareName, softwareType, totalNumber, softwareRemarks);
+                softwareService.registerSoftware(softwareName, softwareType, totalNumber, softwareRemarks, MySession.get().getAccount());
+                setResponsePage(new MakeSoftware());
             }
         };
         add(softwareInfoForm);
@@ -90,6 +102,7 @@ public class MakeSoftware extends SelectSoftware {
         var softwareRemarksField = new TextField<>("softwareRemarks", softwareRemarksModel);
         softwareInfoForm.add(softwareRemarksField);
 
+        /*プルダウン
         var softwareSelection = new DropDownChoice<>("softwareSelection", selectedModel, selectionModel, renderer){
             @Override
             protected void onInitialize() {
@@ -101,16 +114,9 @@ public class MakeSoftware extends SelectSoftware {
                 setLabel(Model.of("課の選択肢"));
             }
         };
-        softwareInfoForm.add(softwareSelection);
+        softwareInfoForm.add(softwareSelection);*/
 
         var feedback = new FeedbackPanel("feedback");
         softwareInfoForm.add(feedback);
-    }
-
-    @Override
-    public void renderHead(IHeaderResponse response){
-        super.renderHead(response);
-        response.render(CssHeaderItem.forReference(new CssResourceReference(MakeSoftware.class, "reset.css")));
-        response.render(CssHeaderItem.forReference(new CssResourceReference(MakeSoftware.class, "style.css")));
     }
 }
