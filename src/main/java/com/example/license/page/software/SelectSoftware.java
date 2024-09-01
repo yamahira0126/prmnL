@@ -59,6 +59,14 @@ public class SelectSoftware extends MainMenu {
                     }
                 };
                 listItem.add(toUpdateSoftware);
+
+                var toDeleteSoftware = new Link<>("toDeleteSoftware"){
+                    @Override
+                    public void onClick() {
+                        setResponsePage(new DeleteSoftware(software));
+                    }
+                };
+                listItem.add(toDeleteSoftware);
             }
 
         };

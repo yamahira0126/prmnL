@@ -9,8 +9,7 @@ public interface ISoftwareRepository {
     public Integer insert(String softwareName, String softwareType,String totalNumber, String softwareRemarks);
 
     public int change(String selectedSoftwareName, String softwareName, String softwareType, String totalNumber, String softwareRemarks);
-
+    public int delete(Integer selectedSoftwareId);
     public List<Software> find();
-
     public List<Software> find(Account account);
 }

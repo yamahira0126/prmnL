@@ -16,12 +16,37 @@
     <script src="../js/scroll.js"></script>
     <!--作成したJavaScriptファイルの読み込み-->
     <script src="humberger.js"></script>
-    <title>システムライセンス管理チーム Cist License management</title>
+    <title>Account</title>
 
     <link rel="stylesheet" href="kawamuraStyle.css">
 </head>
 
 <body>
+<nav id="navi">
+    <ul class="nav-menu">
+        <li><a href="#saisho">はじめての方へ</a></li>
+        <li><a href="#home" wicket:id="toHome">ホーム</a></li>
+        <li><a href="#select" wicket:id="toBudget">予算</a></li>
+        <li><a href="#select" wicket:id="toTerminal">端末</a></li>
+        <li><a href="#select" wicket:id="toSoftware">ソフトウェア</a></li>
+        <li><a href="#License">ライセンス</a></li>
+        <li><a href="#activitylog">アクティビティログ</a></li>
+        <li><a href="#account">アカウント管理</a></li>
+    </ul>
+
+    <ul class="nav-sun">
+        <li><a href="https://youtu.be/YYCaJQ_8ImI?si=KdFZ93pCcBxioEE2" target="_blank">マイページ設定</a></li>
+        <li><a href="https://youtu.be/weYtEthD0kw?si=tGbGkszwRWt3gV_L" target="_blank">お問い合わせ</a></li>
+        <li><a href="#" target="_blank" wicket:id="logout">ログアウト</a></li>
+    </ul>
+</nav>
+
+<div class="toggle_btn">
+    <span></span>
+    <span></span>
+    <span></span>
+</div><div id="mask"></div>
+
     <wicket:extend>
         <section id="select">
             <div id="container">
@@ -34,7 +59,6 @@
                             <th>端末ID</th>
                             <th>端末名称（教室）</th>
                             <th>台数</th>
-<!--                            <th>課</th>-->
                             <th>備考</th>
                             <th>編集</th>
                             <th>削除</th>
@@ -45,10 +69,9 @@
                             <td><span wicket:id="terminalId">1</span></td>
                             <td><span wicket:id="terminalName">H102</span></td>
                             <td><span wicket:id="terminalNumber">20</span></td>
-<!--                            <td><span wicket:id="sectionName">学生支援課</span></td>-->
                             <td><span wicket:id="terminalRemarks">いっぱいあるよ</span></td>
                             <td><a href="#make" wicket:id="toUpdateTerminal">※</a></td>
-                            <td><a href="#">※</a></td>
+                            <td><a href="#make" wicket:id="toDeleteTerminal">※</a></td>
                         </tr>
                         </tbody>
                     </table>

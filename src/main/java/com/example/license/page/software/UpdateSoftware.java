@@ -2,6 +2,7 @@
 package com.example.license.page.software;
 
 import com.example.license.data.Software;
+import com.example.license.page.budget.SelectBudget;
 import com.example.license.service.ISectionService;
 import com.example.license.service.ISoftwareService;
 import org.apache.wicket.markup.html.form.*;
@@ -16,8 +17,8 @@ public class UpdateSoftware extends SelectSoftware {
 
     @SpringBean
     private ISoftwareService softwareService;
-    @SpringBean
-    private ISectionService sectionService;
+    /*@SpringBean
+    private ISectionService sectionService;*/
     public UpdateSoftware(Software selectedSoftware){
         //入力のためのモデル
         var softwareNameModel = Model.of("");
@@ -25,7 +26,7 @@ public class UpdateSoftware extends SelectSoftware {
         var totalNumberModel = Model.of("");
         var softwareRemarksModel = Model.of("");
 
-        var renderer = new ChoiceRenderer<>("softwareName");
+        //var renderer = new ChoiceRenderer<>("softwareName");
 
         var softwareInfoForm = new Form<>("softwareInfo") {
             @Override
@@ -47,7 +48,7 @@ public class UpdateSoftware extends SelectSoftware {
 
 
                 softwareService.renewal(selectedSoftware.getSoftwareName(), softwareName, softwareType, totalNumber, softwareRemarks);
-                setResponsePage(new MakeSoftware());
+                setResponsePage(new SelectSoftware());
             }
         };
         add(softwareInfoForm);

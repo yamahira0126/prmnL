@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:wicket="http://wicket.apache.org">
+<head> <!--そもそも目に見える部分じゃないのがhead-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!--ビューデザイン幅を端末に合わせる-->
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <!--JavaScript ライブラリの読み込み-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script src="../js/scroll.js"></script>
+    <!--作成したJavaScriptファイルの読み込み-->
+    <script src="humberger.js"></script>
+    <title>Account</title>
+    <link rel="stylesheet" href="../css/kawamuraStyle.css">
+</head>
+
+<body>
+<nav id="navi">
+    <ul class="nav-menu">
+        <li><a href="#saisho">はじめての方へ</a></li>
+        <li><a href="#home" wicket:id="toHome">ホーム</a></li>
+        <li><a href="#select" wicket:id="toBudget">予算</a></li>
+        <li><a href="#select" wicket:id="toTerminal">端末</a></li>
+        <li><a href="#select" wicket:id="toSoftware">ソフトウェア</a></li>
+        <li><a href="#License">ライセンス</a></li>
+        <li><a href="#activitylog">アクティビティログ</a></li>
+        <li><a href="#account">アカウント管理</a></li>
+    </ul>
+
+    <ul class="nav-sun">
+        <li><a href="https://youtu.be/YYCaJQ_8ImI?si=KdFZ93pCcBxioEE2" target="_blank">マイページ設定</a></li>
+        <li><a href="https://youtu.be/weYtEthD0kw?si=tGbGkszwRWt3gV_L" target="_blank">お問い合わせ</a></li>
+        <li><a href="#" target="_blank" wicket:id="logout">ログアウト</a></li>
+    </ul>
+</nav>
+
+<div class="toggle_btn">
+    <span></span>
+    <span></span>
+    <span></span>
+</div><div id="mask"></div>
+
+    <wicket:extend>
+        <div id="container">
+            <div id="contents">
+                <h3>&nbsp;予算削除</h3>
+                <form action="#" wicket:id="terminalInfo">
+                    <table class="ta2">
+                        <tr>
+                            <th>端末名称（教室）</th><td><input type="text" wicket:id="terminalName"></td>
+                        </tr>
+                        <tr>
+                            <th>台数</th><td><input type="text"  wicket:id="terminalNumber"></td>
+                        </tr>
+                        <tr>
+                            <th>備考</th><td><input type="text" wicket:id="terminalRemarks"></td>
+                        </tr>
+                    </table>
+                    <button type="submit" class="delete-button">削除</button>
+                    <div wicket:id="feedback"></div>
+                </form>
+            </div>
+        </div>
+    </wicket:extend>
+</body>
+</html>
