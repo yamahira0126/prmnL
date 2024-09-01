@@ -23,7 +23,7 @@ public class MakeLicense extends SelectLicense{
         var accountIdModel = Model.of();
         var serialCodeModel = Model.of();
         var licenseNumberModel = Model.of();
-        Model<File> licenseRemarksModel = Model.of();
+        //Model<File> licenseRemarksModel = Model.of();
 
         var licenseInfoForm = new Form<>("licenseInfo") {
             @Override

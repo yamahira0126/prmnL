@@ -22,10 +22,10 @@ public class LicenseRepository implements ILicenseRepository{
     }
 
     @Override
-    public Integer insert(String softWare, Date licenseStartDate, Date licenseEndDate, String budgetId, String terminalId, String accountId, String serialCode, String licenseNumber, File licenseRemarks) {
-        var sql = "insert into license_table(soft_ware, license_start_date, license_end_date, budget_id, terminal_id, account_id, serial_code, license_number, license_remarks) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public Integer insert(String softWare, Date licenseStartDate, Date licenseEndDate, String budgetId, String terminalId, String accountId, String serialCode, String licenseNumber) {
+        var sql = "insert into license_table(soft_ware, license_start_date, license_end_date, budget_id, terminal_id, account_id, serial_code, license_number) values(?, ?, ?, ?, ?, ?, ?, ?)";
         //licenseの追加
-        var n = jdbc.update(sql, softWare, licenseStartDate, licenseEndDate, budgetId, terminalId, accountId, serialCode, licenseNumber, licenseRemarks);
+        var n = jdbc.update(sql, softWare, licenseStartDate, licenseEndDate, budgetId, terminalId, accountId, serialCode, licenseNumber);
         var idSql = "select * from budget_table order by budget_id desc";
         //IDを降順に並び替える（新規予算は必ずIDが一番大きくなる）
         var license = jdbc.query(idSql, DataClassRowMapper.newInstance(License.class));
@@ -35,9 +35,9 @@ public class LicenseRepository implements ILicenseRepository{
     }
 
     @Override
-    public int change(String selectedLicenseName, String softWare, Date licenseStartDate, Date licenseEndDate, String budgetId, String terminalId, String accountId, String serialCode, String licenseNumber, File licenseRemarks) {
-        var sql = "update license_table set soft_ware = ?, license_start_date = ?, license_end_date = ?, budget_id = ?, terminal_id = ?, account_id = ?, serial_code = ?, license_number = ?, license_remarks = ? where license_name = ?";
-        var n = jdbc.update(sql, softWare, licenseStartDate, licenseEndDate, budgetId, terminalId, accountId, serialCode, licenseNumber, licenseRemarks ,selectedLicenseName);
+    public int change(String selectedLicenseName, String softWare, Date licenseStartDate, Date licenseEndDate, String budgetId, String terminalId, String accountId, String serialCode, String licenseNumber) {
+        var sql = "update license_table set soft_ware = ?, license_start_date = ?, license_end_date = ?, budget_id = ?, terminal_id = ?, account_id = ?, serial_code = ?, license_number = ? where license_name = ?";
+        var n = jdbc.update(sql, softWare, licenseStartDate, licenseEndDate, budgetId, terminalId, accountId, serialCode, licenseNumber ,selectedLicenseName);
         return n;
     }
 
