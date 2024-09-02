@@ -2,13 +2,17 @@ package com.example.license.page.license;
 
 
 import com.example.license.MySession;
-import com.example.license.service.ILicenseService;
-import com.example.license.service.ISectionService;
+import com.example.license.data.Budget;
+import com.example.license.data.Software;
+import com.example.license.service.*;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
+import org.apache.wicket.markup.html.form.ChoiceRenderer;
+import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.form.upload.FileUpload;
 import org.apache.wicket.markup.html.form.upload.FileUploadField;
+import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
@@ -21,19 +25,32 @@ public class MakeLicense extends SelectLicense{
 
     @SpringBean
     private ILicenseService licenseService;
-    private ISectionService sectionService;
+    @SpringBean
+    private ISoftwareService softwareService;
+    @SpringBean
+    private IBudgetService budgetService;
+    @SpringBean
+    private ITerminalService terminalService;
+    @SpringBean
+    private IAccountService accountService;
 
     public MakeLicense() {
 
+//        var selectionSoftwareModel = LoadableDetachableModel.of(() -> softwareService.findSoftwares(MySession.get().getAccount()));
+//        var selectedSoftwareModel = new Model<Software>();
         Model<String> softwareIdModel = Model.of();
         Model<Date> licenseStartDateModel = Model.of(new Date());
         Model<Date> licenseEndDateModel = Model.of(new Date());
-        Model<String> budgetIdModel = Model.of();
+        var selectionBudgetModel = LoadableDetachableModel.of(() -> budgetService.findBudgets(MySession.get().getAccount()));
+        var selectedBudgetModel = new Model<Budget>();
         Model<String> terminalIdModel = Model.of();
         Model<String> accountIdModel = Model.of();
         Model<String> serialCodeModel = Model.of();
         Model<String> licenseNumberModel = Model.of();
         //Model<File> licenseRemarksModel = Model.of();
+
+        var rendererBudget = new ChoiceRenderer<>("budgetName");
+        //var rendererSoftware = new ChoiceRenderer<>("softwareName");
 
         var licenseInfoForm = new Form<>("licenseInfo") {
             @Override
@@ -41,7 +58,7 @@ public class MakeLicense extends SelectLicense{
                 var softwareId = softwareIdModel.getObject();
                 Date licenseStartDate = licenseStartDateModel.getObject();
                 Date licenseEndDate = licenseEndDateModel.getObject();
-                var budgetId = budgetIdModel.getObject();
+                var budgetId = selectedBudgetModel.getObject().getBudgetId().toString();
                 var terminalId = terminalIdModel.getObject();
                 var accountId = accountIdModel.getObject();
                 var serialCode = serialCodeModel.getObject();
@@ -72,7 +89,7 @@ public class MakeLicense extends SelectLicense{
         };
         add(licenseInfoForm);
 
-        var softwareIdField = new TextField<>("softwareId", softwareIdModel) {
+        var softwareIdField = new TextField<>("softwareId", softwareIdModel){
             @Override
             protected void onInitialize() {
                 // このDropDownChoiceの初期化用の処理
@@ -80,7 +97,7 @@ public class MakeLicense extends SelectLicense{
                 // 空欄の選択肢の送信を許可しないバリデーション
                 setRequired(true);
                 // エラーメッセージに表示する名前を設定
-                setLabel(Model.of("ソフトウェアIDの選択肢"));
+                setLabel(Model.of("予算IDの選択肢"));
             }
         };
         licenseInfoForm.add(softwareIdField);
@@ -111,7 +128,7 @@ public class MakeLicense extends SelectLicense{
         };
         licenseInfoForm.add(licenseEndDateField);
 
-        var budgetIdField = new TextField<>("budgetId", budgetIdModel) {
+        var budgetSelection = new DropDownChoice<>("budgetId", selectedBudgetModel, selectionBudgetModel, rendererBudget){
             @Override
             protected void onInitialize() {
                 // このDropDownChoiceの初期化用の処理
@@ -122,7 +139,7 @@ public class MakeLicense extends SelectLicense{
                 setLabel(Model.of("予算IDの選択肢"));
             }
         };
-        licenseInfoForm.add(budgetIdField);
+        licenseInfoForm.add(budgetSelection);
 
         var terminalIdField = new TextField<>("terminalId", terminalIdModel) {
             @Override
