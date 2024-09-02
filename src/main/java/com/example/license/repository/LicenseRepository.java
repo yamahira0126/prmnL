@@ -30,14 +30,14 @@ public class LicenseRepository implements ILicenseRepository{
         //IDを降順に並び替える（新規予算は必ずIDが一番大きくなる）
         var license = jdbc.query(idSql, DataClassRowMapper.newInstance(License.class));
         //Listの一番上のbudgetを取り出し、IDを抽出
-        Integer licenseId = license.get(0).licenseId();
+        Integer licenseId = license.get(0).getLicenseId();
         return licenseId;
     }
 
     @Override
-    public int change(String selectedLicenseName, String softwareId, Date licenseStartDate, Date licenseEndDate, String budgetId, String terminalId, String accountId, String serialCode, String licenseNumber) {
-        var sql = "update license_table set software_id = ?, license_start_date = ?, license_end_date = ?, budget_id = ?, terminal_id = ?, account_id = ?, serial_code = ?, license_number = ? where license_name = ?";
-        var n = jdbc.update(sql, softwareId, licenseStartDate, licenseEndDate, budgetId, terminalId, accountId, serialCode, licenseNumber ,selectedLicenseName);
+    public int change(Integer selectedLicenseId, String softwareId, Date licenseStartDate, Date licenseEndDate, String budgetId, String terminalId, String accountId, String serialCode, String licenseNumber) {
+        var sql = "update license_table set software_id = ?, license_start_date = ?, license_end_date = ?, budget_id = ?, terminal_id = ?, account_id = ?, serial_code = ?, license_number = ? where license_Id = ?";
+        var n = jdbc.update(sql, softwareId, licenseStartDate, licenseEndDate, budgetId, terminalId, accountId, serialCode, licenseNumber ,selectedLicenseId);
         return n;
     }
 

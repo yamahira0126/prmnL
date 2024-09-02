@@ -47,8 +47,8 @@ public class LicenseService implements ILicenseService {
     }
 
     @Override
-    public void renewal(String selectedLicenseName, String softwareId, Date licenseStartDate, Date licenseEndDate, String budgetId, String terminalId, String accountId, String serialCode, String licenseNumber){
-        int n = licenseRepos.change(selectedLicenseName, softwareId, licenseStartDate, licenseEndDate, budgetId, terminalId, accountId, serialCode, licenseNumber);
+    public void renewal(Integer selectedLicenseId, String softwareId, Date licenseStartDate, Date licenseEndDate, String budgetId, String terminalId, String accountId, String serialCode, String licenseNumber){
+        int n = licenseRepos.change(selectedLicenseId, softwareId, licenseStartDate, licenseEndDate, budgetId, terminalId, accountId, serialCode, licenseNumber);
         System.out.println("記録行数：" + n);
     }
 
