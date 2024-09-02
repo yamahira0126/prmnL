@@ -36,7 +36,7 @@ public class MakeBudget extends SelectBudget {
         var budgetInfoForm = new Form<>("budgetInfo") {
             @Override
             protected void onSubmit() {
-                var budgetName = budgetNameModel.getObject();
+                String budgetName = budgetNameModel.getObject();
                 Date budgetStartDate = budgetStartDateModel.getObject();
                 Date budgetEndDate = budgetEndDateModel.getObject();
                 //var section = selectedModel.getObject();

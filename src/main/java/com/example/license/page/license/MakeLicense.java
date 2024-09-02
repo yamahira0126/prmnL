@@ -1,12 +1,16 @@
 package com.example.license.page.license;
 
 
+import com.example.license.MySession;
+import com.example.license.service.ILicenseService;
+import com.example.license.service.ISectionService;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.form.upload.FileUpload;
 import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
 
 import java.io.File;
@@ -14,15 +18,21 @@ import java.util.Date;
 
 @MountPath("MakeLicense")
 public class MakeLicense extends SelectLicense{
+
+    @SpringBean
+    private ILicenseService licenseService;
+    private ISectionService sectionService;
+
     public MakeLicense() {
-        var softwareIdModel = Model.of();
+
+        Model<String> softwareIdModel = Model.of();
         Model<Date> licenseStartDateModel = Model.of(new Date());
         Model<Date> licenseEndDateModel = Model.of(new Date());
-        var budgetIdModel = Model.of();
-        var terminalIdModel = Model.of();
-        var accountIdModel = Model.of();
-        var serialCodeModel = Model.of();
-        var licenseNumberModel = Model.of();
+        Model<String> budgetIdModel = Model.of();
+        Model<String> terminalIdModel = Model.of();
+        Model<String> accountIdModel = Model.of();
+        Model<String> serialCodeModel = Model.of();
+        Model<String> licenseNumberModel = Model.of();
         //Model<File> licenseRemarksModel = Model.of();
 
         var licenseInfoForm = new Form<>("licenseInfo") {
@@ -48,6 +58,15 @@ public class MakeLicense extends SelectLicense{
                         + licenseNumber;
                 System.out.println(msg);
 
+                licenseService.registerLicense(softwareId,
+                        licenseStartDate,
+                        licenseEndDate,
+                        budgetId,
+                        terminalId,
+                        accountId,
+                        serialCode,
+                        licenseNumber,
+                        MySession.get().getAccount());
                 setResponsePage(new MakeLicense());
             }
         };
