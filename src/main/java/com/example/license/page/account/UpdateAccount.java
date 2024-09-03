@@ -1,6 +1,6 @@
 package com.example.license.page.account;
 
-import com.example.license.MySession;
+import com.example.license.data.Account;
 import com.example.license.data.Section;
 import com.example.license.service.IAccountService;
 import com.example.license.service.ISectionService;
@@ -14,15 +14,16 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
 
-@MountPath("MakeAccount")
-public class MakeAccount extends SelectAccount {
+@MountPath("UpdateAccount")
+public class UpdateAccount extends SelectAccount{
 
     @SpringBean
     private IAccountService accountService;
     @SpringBean
     private ISectionService sectionService;
 
-    public MakeAccount() {
+    public UpdateAccount(Account selectedAccount){
+
         //入力のためのモデル
         var accountNameModel = Model.of("");
         var accountPasswordModel = Model.of("");
@@ -44,8 +45,8 @@ public class MakeAccount extends SelectAccount {
                         + section;
                 System.out.println(msg);
 
-                accountService.registerAccount(accountName, accountPassword, section);
-                setResponsePage(new MakeAccount());
+                accountService.renewalAccount(selectedAccount.getAccountId(), accountName, accountPassword, section);
+                setResponsePage(new SelectAccount());
             }
         };
         add(accountInfoForm);
@@ -55,6 +56,7 @@ public class MakeAccount extends SelectAccount {
             protected void onInitialize() {
                 // このDropDownChoiceの初期化用の処理
                 super.onInitialize();
+                setModelObject(selectedAccount.getAccountName());
                 // 空欄の選択肢の送信を許可しないバリデーション
                 setRequired(true);
                 // エラーメッセージに表示する名前を設定
@@ -68,6 +70,7 @@ public class MakeAccount extends SelectAccount {
             protected void onInitialize() {
                 // このDropDownChoiceの初期化用の処理
                 super.onInitialize();
+                setModelObject(selectedAccount.getAccountPass());
                 // 空欄の選択肢の送信を許可しないバリデーション
                 setRequired(true);
                 // エラーメッセージに表示する名前を設定
@@ -82,10 +85,15 @@ public class MakeAccount extends SelectAccount {
             protected void onInitialize() {
                 // このDropDownChoiceの初期化用の処理
                 super.onInitialize();
-                // 必ず空欄の選択肢を用意するように設定
-                setNullValid(true);
+//                // 必ず空欄の選択肢を用意するように設定
+//                setNullValid(true);
+                //登録されている課を初期値にする
+                var selectedSectionName = getChoices().stream()
+                        .findFirst()
+                        .orElse(null);
+                setModelObject(selectedSectionName);
                 // 空欄の選択肢の送信を許可しないバリデーション
-                //setRequired(true);
+                setRequired(true);
                 // エラーメッセージに表示する名前を設定
                 setLabel(Model.of("課の選択肢"));
             }
@@ -96,5 +104,4 @@ public class MakeAccount extends SelectAccount {
         accountInfoForm.add(feedback);
 
     }
-
 }

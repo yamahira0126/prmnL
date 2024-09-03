@@ -1,6 +1,7 @@
 package com.example.license.page.common;
 
 import com.example.license.MySession;
+import com.example.license.page.account.SelectAccount;
 import com.example.license.page.budget.SelectBudget;
 import com.example.license.page.software.SelectSoftware;
 import com.example.license.page.terminal.SelectTerminal;
@@ -38,6 +39,8 @@ public class HomePage extends WebPage {
         add(toTerminal);
         var toHome = new BookmarkablePageLink<>("toHome", HomePage.class);
         add(toHome);
+        var toAccount = new BookmarkablePageLink<>("toAccount", SelectAccount.class);
+        add(toAccount);
         var loginNameModel = Model.of(loginName);
         var loginNameLabel = new Label("loginName", loginNameModel);
         add(loginNameLabel);

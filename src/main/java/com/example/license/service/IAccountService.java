@@ -1,10 +1,14 @@
 package com.example.license.service;
 
 import com.example.license.data.Account;
+import com.example.license.data.Section;
+
+import java.util.Date;
+import java.util.List;
 
 public interface IAccountService {
 
-    public void registerAccount(String accountName, String accountPass);
+    //public void registerAccount(String accountName, String accountPass);
 
     /**
      * ユーザ名とパスワードをデータベースに照合する
@@ -16,4 +20,9 @@ public interface IAccountService {
     public boolean existsAccount(String accountName, String accountPass);
 
     public Account termsFindAccount(String accountName, String accountPass);
+
+    public void registerAccount(String accountName, String accountPassword, Section section);
+    public void renewalAccount(Integer selectedAccountId, String accountName, String accountPassword, Section section);
+    public void deleteAccount(Integer selectedAccountId);
+    public List<Account> findAccounts();
 }

@@ -22,27 +22,50 @@
 </head>
 
 <body>
+<nav id="navi">
+  <ul class="nav-menu">
+    <li><a href="#saisho">はじめての方へ</a></li>
+    <li><a href="#home" wicket:id="toHome">ホーム</a></li>
+    <li><a href="#select" wicket:id="toBudget">予算</a></li>
+    <li><a href="#select" wicket:id="toTerminal">端末</a></li>
+    <li><a href="#select" wicket:id="toSoftware">ソフトウェア</a></li>
+    <li><a href="#License">ライセンス</a></li>
+    <li><a href="#activitylog">アクティビティログ</a></li>
+    <li><a href="#account">アカウント管理</a></li>
+  </ul>
+
+  <ul class="nav-sun">
+    <li><a href="https://youtu.be/YYCaJQ_8ImI?si=KdFZ93pCcBxioEE2" target="_blank">マイページ設定</a></li>
+    <li><a href="https://youtu.be/weYtEthD0kw?si=tGbGkszwRWt3gV_L" target="_blank">お問い合わせ</a></li>
+    <li><a href="#" target="_blank" wicket:id="logout">ログアウト</a></li>
+  </ul>
+</nav>
+
+<div class="toggle_btn">
+  <span></span>
+  <span></span>
+  <span></span>
+</div><div id="mask"></div>
+
   <wicket:extend>
     <div id="container">
       <div id="contents">
         <h3>アカウント登録</h3>
-        <table class="ta1">
-          <tr>
-            <th>id</th><td><input type="text"></td>
-          </tr>
-          <tr>
-            <th>名前</th><td><input type="text"></td>
-          </tr>
-          <tr>
-            <th>メールアドレス</th><td><input type="text"></td>
-          </tr>
-          <tr>
-            <th>パスワード</th><td><input type="text"></td>
-          </tr>
-          <tr>
-            <th>所属</th><td><select><option>学生支援課</option></select></td>
-          </tr>
-        </table>
+        <form action="#" wicket:id="accountInfo">
+          <table class="ta2">
+            <tr>
+              <th>アカウント名</th><td><input type="text" wicket:id="accountName"></td>
+            </tr>
+            <tr>
+              <th>アカウントパスワード</th><td><input type="text" wicket:id="accountPassword"></td>
+            </tr>
+            <tr>
+                <th>課</th><td><select wicket:id="sectionName"><option></option></select></td>
+            </tr>
+          </table>
+          <button type="submit" class="registration-button">登録</button>
+          <span wicket:id="feedback"></span>
+        </form>
       </div>
     </div>
   </wicket:extend>
