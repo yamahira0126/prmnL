@@ -13,10 +13,13 @@ public interface IAccountRepository {
      * @param accountPass パスワード
      * @return データベースの更新行数
      */
-    public int insert(String accountName, String accountPass);
-
     public boolean exists(String accountName, String accountPass);
 
     public List<Account> termsFind(String accountName, String accountPass);
+
+    public int insert(String accountName, String accountPass);
+    public int change(Integer selectedAccountId, String accountName, String accountPass);
+    public int delete(Integer selectedAccountId);
+    public List<Account> find();
 
 }

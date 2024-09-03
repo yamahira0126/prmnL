@@ -1,7 +1,9 @@
 package com.example.license.page.common;
 
 import com.example.license.MySession;
+import com.example.license.page.account.SelectAccount;
 import com.example.license.page.budget.SelectBudget;
+import com.example.license.page.login.Login;
 import com.example.license.page.software.SelectSoftware;
 import com.example.license.page.terminal.SelectTerminal;
 import org.apache.wicket.markup.head.CssHeaderItem;
@@ -26,10 +28,13 @@ public class MainMenu extends WebPage {
         add(toTerminal);
         var toHome = new BookmarkablePageLink<>("toHome", HomePage.class);
         add(toHome);
+        var toAccount = new BookmarkablePageLink<>("toAccount", SelectAccount.class);
+        add(toAccount);
         var logout = new Link<>("logout"){
             @Override
             public void onClick() {
                 MySession.get().invalidate();
+                setResponsePage(Login.class);
             }
         };
         add(logout);

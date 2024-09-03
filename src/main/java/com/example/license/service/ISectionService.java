@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ISectionService {
     public List<Section> findSections();
+    public List<Section> findAccountSections();
 }

@@ -25,4 +25,25 @@ public class AccountSectionRepository implements IAccountSectionRepository{
         System.out.println("sectionId:"+sectionId);
         return sectionId;
     }
+
+    @Override
+    public int insert(Integer accountId, Integer sectionId) {
+        var sql = "insert into account_section_table(account_id, section_id) values(?,?)";
+        var n = jdbc.update(sql, accountId, sectionId);
+        return n;
+    }
+
+    @Override
+    public int change(Integer accountId, Integer sectionId) {
+        var sql = "update account_section_table set section_id = ? where account_id = ?";
+        var n = jdbc.update(sql, sectionId, accountId);
+        return n;
+    }
+
+    @Override
+    public int delete(Integer accountId) {
+        var sql = "update account_section_table set account_section_exist = 0 where account_id = ?";
+        var n = jdbc.update(sql, accountId);
+        return n;
+    }
 }
