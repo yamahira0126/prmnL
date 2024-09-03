@@ -23,4 +23,11 @@ public class SectionService implements ISectionService{
         System.out.println("データ件数 findSections：" + sections.size());
         return sections;
     }
+
+    @Override
+    public List<Section> findAccountSections(){
+        var sections = sectionRepos.findSectionName();
+        System.out.println("データ件数 findAccountSections：" + sections.size());
+        return sections;
+    }
 }

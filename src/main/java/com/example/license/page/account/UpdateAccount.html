@@ -47,54 +47,27 @@
     <span></span>
 </div><div id="mask"></div>
 
-    <wicket:extend>
-        <section id="select">
-            <div id="container">
-                <div id="contents">
-                    <h2>Account</h2>
-                    <h3>アカウント一覧</h3>
-                    <table class="ta2">
-                        <thead>
-                        <tr>
-                            <th>アカウントID</th>
-                            <th>名前</th>
-                            <!--<th>メールアドレス</th>-->
-                            <th>パスワード</th>
-                            <!--<th>課</th>-->
-                            <th>編集</th>
-                            <th>削除</th>
-                        </tr>
-                        </thead>
-                        <tbody wicket:id="accounts">
-                        <tr>
-                            <td><span wicket:id="accountId">011</span></td>
-                            <td><span wicket:id="accountName">山平竜世</span></td>
-                            <!--<td><span>b2222490</span></td>-->
-                            <td><span wicket:id="accountPassword">KABENOBORI</span></td>
-                        </tr>
-                        </tbody>
-
-                        <tbody wicket:id="sections">
-                        <tr>
-                            <td><span wicket:id="accountSectionName">管理者</span></td>
-                        </tr>
-                        </tbody>
-
-                            <!--<td><span wicket:id="accountSection">学生支援課</span></td>-->
-                        <tbody wicket:id="edit">
-                        <tr>
-                            <td><a href="make" wicket:id="toUpdateAccount">※</a></td>
-                            <td><a href="make" wicket:id="toDeleteAccount">※</a></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <a href="#make" wicket:id="toMakeAccount">＋</a>
-                </div>
-            </div>
-        </section>
-        <section id="make">
-            <wicket:child/>
-        </section>
-    </wicket:extend>
+<wicket:extend>
+    <div id="container">
+        <div id="contents">
+            <h3>アカウント編集</h3>
+            <form action="#" wicket:id="accountInfo">
+                <table class="ta2">
+                    <tr>
+                        <th>アカウント名</th><td><input type="text" wicket:id="accountName"></td>
+                    </tr>
+                    <tr>
+                        <th>アカウントパスワード</th><td><input type="text" wicket:id="accountPassword"></td>
+                    </tr>
+                    <tr>
+                        <th>課</th><td><select wicket:id="sectionName"><option></option></select></td>
+                    </tr>
+                </table>
+                <button type="submit" class="registration-button">更新</button>
+                <span wicket:id="feedback"></span>
+            </form>
+        </div>
+    </div>
+</wicket:extend>
 </body>
 </html>
