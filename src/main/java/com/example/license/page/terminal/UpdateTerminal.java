@@ -19,8 +19,8 @@ import org.wicketstuff.annotation.mount.MountPath;
 public class UpdateTerminal extends SelectTerminal {
     @SpringBean
     private ITerminalService terminalService;
-    @SpringBean
-    private ISectionService sectionService;
+    /*@SpringBean
+    private ISectionService sectionService;*/
 
     public UpdateTerminal(Terminal selectedTerminal) {
         //入力のためのモデル
@@ -28,10 +28,7 @@ public class UpdateTerminal extends SelectTerminal {
         var terminalNumberModel = Model.of("");
         var terminalRemarksModel = Model.of("");
 
-        var selectionModel = LoadableDetachableModel.of(() -> sectionService.findSections());
-        var selectedModel = new Model<Section>();
-
-        var renderer = new ChoiceRenderer<>("sectionName");
+        //var renderer = new ChoiceRenderer<>("sectionName");
 
         var terminalInfoForm = new Form<>("terminalInfo") {
             @Override
@@ -39,20 +36,17 @@ public class UpdateTerminal extends SelectTerminal {
                 var terminalName = terminalNameModel.getObject();
                 var terminalNumber = terminalNumberModel.getObject();
                 var terminalRemarks = terminalRemarksModel.getObject();
-                var sectionName = selectedModel.getObject().getSectionName();
                 var msg = "送信データ"
                         + terminalName
                         +","
                         +terminalNumber
                         +","
                         +terminalRemarks
-                        +","
-                        +sectionName;
+                        +",";
                 System.out.println(msg);
 
-
                 terminalService.renewal(selectedTerminal.getTerminalName(),terminalName, terminalNumber, terminalRemarks);
-                setResponsePage(MakeTerminal.class);
+                setResponsePage(new SelectTerminal());
             }
         };
         add(terminalInfoForm);
@@ -96,7 +90,7 @@ public class UpdateTerminal extends SelectTerminal {
         };
         terminalInfoForm.add(terminalRemarksField);
 
-        var sectionSelection = new DropDownChoice<>("sectionName", selectedModel, selectionModel, renderer) {
+        /*var sectionSelection = new DropDownChoice<>("sectionName", selectedModel, selectionModel, renderer) {
             @Override
             protected void onInitialize() {
                 // このDropDownChoiceの初期化用の処理
@@ -109,7 +103,7 @@ public class UpdateTerminal extends SelectTerminal {
                 setLabel(Model.of("課の選択肢"));
             }
         };
-        terminalInfoForm.add(sectionSelection);
+        terminalInfoForm.add(sectionSelection);*/
 
 
         var feedback = new FeedbackPanel("feedback");

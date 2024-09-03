@@ -14,10 +14,8 @@ public class TerminalSectionRepository implements ITerminalSectionRepository{
 
     @Override
     public int insert(Integer terminalId, Integer sectionId) {
-        var sql = "insert into terminal_section_table(terminal_id, section_id) values(?, ?)";
+        var sql = "insert into terminal_section_table values(?, ?)";
         var n = jdbc.update(sql, terminalId, sectionId);
         return n;
     }
-
-
 }

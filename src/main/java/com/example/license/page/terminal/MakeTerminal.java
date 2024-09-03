@@ -3,12 +3,10 @@
 package com.example.license.page.terminal;
 
 
-import com.example.license.data.Section;
-import com.example.license.service.ISectionService;
+import com.example.license.MySession;
 import com.example.license.service.ITerminalService;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
-import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
@@ -17,8 +15,8 @@ import org.wicketstuff.annotation.mount.MountPath;
 public class MakeTerminal extends SelectTerminal {
     @SpringBean
     private ITerminalService terminalService;
-    @SpringBean
-    private ISectionService sectionService;
+    /*@SpringBean
+    private ISectionService sectionService;*/
 
     public MakeTerminal() {
         //入力のためのモデル
@@ -26,12 +24,7 @@ public class MakeTerminal extends SelectTerminal {
         var terminalNumberModel = Model.of("");
         var terminalRemarksModel = Model.of("");
 
-
-        var selectionModel = LoadableDetachableModel.of(() -> sectionService.findSections());
-        var selectedModel = new Model<Section>();
-
-        var renderer = new ChoiceRenderer<>("sectionName");
-
+        //var renderer = new ChoiceRenderer<>("sectionName");
 
         var terminalInfoForm = new Form<>("terminalInfo") {
             @Override
@@ -39,19 +32,19 @@ public class MakeTerminal extends SelectTerminal {
                 var terminalName = terminalNameModel.getObject();
                 var terminalNumber = terminalNumberModel.getObject();
                 var terminalRemarks = terminalRemarksModel.getObject();
-                var section = selectedModel.getObject();
                 var msg = "送信データ"
                         + terminalName
                         +","
                         +terminalNumber
                         +","
                         +terminalRemarks
-                        +","
-                        +section;
+                        +",";
                 System.out.println(msg);
 
-                terminalService.registerTerminal(terminalName, terminalNumber, terminalRemarks, section);
-                setResponsePage(MakeTerminal.class);
+                //変更
+                //terminalService.registerTerminal(terminalName, terminalNumber, terminalRemarks, section);
+                terminalService.registerTerminal(terminalName, terminalNumber, terminalRemarks, MySession.get().getAccount());
+                setResponsePage(new MakeTerminal());
             }
         };
         add(terminalInfoForm);
@@ -86,7 +79,7 @@ public class MakeTerminal extends SelectTerminal {
         terminalInfoForm.add(terminalRemarksField);
 
 
-        var sectionSelection = new DropDownChoice<>("sectionName", selectedModel, selectionModel, renderer) {
+        /*var sectionSelection = new DropDownChoice<>("sectionName", selectedModel, selectionModel, renderer) {
             @Override
             protected void onInitialize() {
                 // このDropDownChoiceの初期化用の処理
@@ -99,7 +92,7 @@ public class MakeTerminal extends SelectTerminal {
                 setLabel(Model.of("課の選択肢"));
             }
         };
-        terminalInfoForm.add(sectionSelection);
+        terminalInfoForm.add(sectionSelection);*/
 
 
 

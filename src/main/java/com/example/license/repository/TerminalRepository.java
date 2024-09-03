@@ -1,5 +1,7 @@
 package com.example.license.repository;
 
+import com.example.license.data.Account;
+import com.example.license.data.Budget;
 import com.example.license.data.Terminal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.DataClassRowMapper;
@@ -33,13 +35,35 @@ public class TerminalRepository implements ITerminalRepository {
         var n = jdbc.update(sql, terminalName, terminalNumber, terminalRemarks, selectedTerminalName);
         return n;
     }
+    @Override
+    public int delete(Integer selectedTerminalId) {
+        var sql = "update terminal_table set terminal_exist = ? where terminal_id = ?";
+        var n = jdbc.update(sql, 0, selectedTerminalId);
+        return n;
+    }
 
     @Override
     public List<Terminal> find() {
-        String sql = "select terminal_id,terminal_name, terminal_number, terminal_remarks from terminal_table";
+        String sql = "select * from terminal_table";
 
         List<Terminal> terminals = jdbc.query(sql, DataClassRowMapper.newInstance(Terminal.class));
 
+        return terminals;
+    }
+
+    @Override
+    public List<Terminal> find(Account account) {
+        var accountId = account.getAccountId();
+        //accountId=sectionId=terminalIdかつterminal_exist=1で検索
+        String sql = "select terminal_table.terminal_id,terminal_name, terminal_number, terminal_remarks"
+                + " from account_section_table"
+                + " inner join terminal_section_table"
+                + " on account_section_table.section_id = terminal_section_table.section_id"
+                + " inner join terminal_table"
+                + " on terminal_table.terminal_id = terminal_section_table.terminal_id"
+                + " where account_id = ?"
+                + " and terminal_exist = 1";
+        List<Terminal> terminals = jdbc.query(sql, DataClassRowMapper.newInstance(Terminal.class), accountId);
         return terminals;
     }
 }

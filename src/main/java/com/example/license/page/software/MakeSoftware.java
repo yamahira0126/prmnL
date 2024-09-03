@@ -1,18 +1,10 @@
 package com.example.license.page.software;
 
 import com.example.license.MySession;
-import com.example.license.data.Software;
-import com.example.license.page.budget.MakeBudget;
-import com.example.license.repository.ISoftwareSectionRepository;
-import com.example.license.service.ISectionService;
 import com.example.license.service.ISoftwareService;
-import org.apache.wicket.markup.head.CssHeaderItem;
-import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
-import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
 
@@ -22,8 +14,9 @@ public class MakeSoftware extends SelectSoftware {
 
     @SpringBean
     private ISoftwareService softwareService;
-    @SpringBean
-    private ISectionService sectionService;
+    /*@SpringBean
+    private ISectionService sectionService;*/
+
     public MakeSoftware(){
         //入力のためのモデル
         var softwareNameModel = Model.of("");
@@ -31,7 +24,7 @@ public class MakeSoftware extends SelectSoftware {
         var totalNumberModel = Model.of("");
         var softwareRemarksModel = Model.of("");
 
-        var renderer = new ChoiceRenderer<>("softwareName");
+        //var renderer = new ChoiceRenderer<>("softwareName");
 
         var softwareInfoForm = new Form<>("softwareInfo") {
             @Override

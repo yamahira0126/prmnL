@@ -40,6 +40,13 @@ public class SoftwareRepository implements ISoftwareRepository {
     }
 
     @Override
+    public int delete(Integer selectedSoftwareId) {
+        var sql = "update software_table set software_exist = ? where software_id = ?";
+        var n = jdbc.update(sql, 0, selectedSoftwareId);
+        return n;
+    }
+
+    @Override
     public List<Software> find() {
         var sql = "select * from software_table";
 
@@ -50,14 +57,15 @@ public class SoftwareRepository implements ISoftwareRepository {
     @Override
     public List<Software> find(Account account) {
         var accountId = account.getAccountId();
-        //accountId=sectionId=softwareIdで検索
+        //accountId=sectionId=softwareIdかつsoftware_exist=1で検索
         String sql = "select software_table.software_id, software_name, software_type, total_number, software_remarks"
                 + " from account_section_table"
                 + " inner join software_section_table"
                 + " on account_section_table.section_id = software_section_table.section_id"
                 + " inner join software_table"
                 + " on software_table.software_id = software_section_table.software_id"
-                + " where account_id = ?";
+                + " where account_id = ?"
+                + " and software_exist = 1";
         List<Software> softwares = jdbc.query(sql, DataClassRowMapper.newInstance(Software.class), accountId);
         return softwares;
     }

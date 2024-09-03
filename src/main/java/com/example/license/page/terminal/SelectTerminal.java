@@ -2,6 +2,7 @@
 
 package com.example.license.page.terminal;
 
+import com.example.license.MySession;
 import com.example.license.data.Terminal;
 import com.example.license.page.common.MainMenu;
 import com.example.license.service.ITerminalService;
@@ -21,7 +22,7 @@ public class SelectTerminal extends MainMenu {
     private ITerminalService terminalService;
     public  SelectTerminal() {
 
-        var terminalsModel = Model.ofList(terminalService.findTerminals());
+        var terminalsModel = Model.ofList(terminalService.findTerminals(MySession.get().getAccount()));
 
         var terminalsLV = new ListView<>("terminals", terminalsModel) {
             @Override
@@ -52,12 +53,17 @@ public class SelectTerminal extends MainMenu {
                     }
                 };
                 listItem.add(toUpdateTerminal);
+
+                var toDeleteTerminal = new Link<>("toDeleteTerminal") {
+                    @Override
+                    public void onClick() {
+                        setResponsePage(new DeleteTerminal(terminal));
+                    }
+                };
+                listItem.add(toDeleteTerminal);
             }
         };
         add(terminalsLV);
-
-
-
 
         //MakeTerminalページに遷移する
         var toMakeTerminal = new BookmarkablePageLink<>("toMakeTerminal", MakeTerminal.class);

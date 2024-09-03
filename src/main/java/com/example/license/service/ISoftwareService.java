@@ -9,8 +9,7 @@ public interface ISoftwareService {
     public void registerSoftware(String softwareName, String softwareType, String totalNumber, String softwareRemarks, Account account);
 
     public void renewal(String selectedSoftware,String softwareName, String softwareType,String totalNumber, String softwareRemarks);
-
-    public List<Software> findSoftwares();
-
+    public void deleteSoftware(Integer selectedSoftwareId);
+    //public List<Software> findSoftwares();
     public List<Software> findSoftwares(Account account);
 }
