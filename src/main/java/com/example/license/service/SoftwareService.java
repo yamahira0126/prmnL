@@ -44,6 +44,7 @@ public class SoftwareService implements ISoftwareService{
     @Override
     public void deleteSoftware(Integer selectedSoftwareId) {
         int n = softwareRepos.delete(selectedSoftwareId);
+        softwareSectionRepos.delete(selectedSoftwareId);
         System.out.println("記録行数：" + n);
     }
 
