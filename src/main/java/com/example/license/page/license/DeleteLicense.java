@@ -1,5 +1,6 @@
 package com.example.license.page.license;
 
+
 import com.example.license.MySession;
 import com.example.license.data.*;
 import com.example.license.service.*;
@@ -8,16 +9,19 @@ import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.form.upload.FileUpload;
+import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
 
+import java.io.File;
 import java.util.Date;
 import java.util.Optional;
 
-@MountPath("UpdateLicense")
-public class UpdateLicense extends SelectLicense {
+@MountPath("DeleteLicense")
+public class DeleteLicense extends SelectLicense{
 
     @SpringBean
     private ILicenseService licenseService;
@@ -30,7 +34,7 @@ public class UpdateLicense extends SelectLicense {
     @SpringBean
     private IAccountService accountService;
 
-    public UpdateLicense(License selectedLicense) {
+    public DeleteLicense(License selectedLicense) {
 
         var softwareList = softwareService.findSoftwares(MySession.get().getAccount());
         var selectionSoftwareModel = LoadableDetachableModel.of(() -> softwareList);
@@ -95,15 +99,7 @@ public class UpdateLicense extends SelectLicense {
                         + licenseNumber;
                 System.out.println(msg);
 
-                licenseService.renewal(selectedLicense.getLicenseId(),
-                        softwareId,
-                        licenseStartDate,
-                        licenseEndDate,
-                        budgetId,
-                        terminalId,
-                        accountId,
-                        serialCode,
-                        licenseNumber);
+                licenseService.deleteLicense(selectedLicense.getLicenseId());
                 setResponsePage(new SelectLicense());
             }
         };
@@ -216,6 +212,7 @@ public class UpdateLicense extends SelectLicense {
             }
         };
         licenseInfoForm.add(licenseNumberField);
+
 
     }
 }

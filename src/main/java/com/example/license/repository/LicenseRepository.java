@@ -54,6 +54,7 @@ public class LicenseRepository implements ILicenseRepository{
     public int delete(Integer selectedLicenseId) {
         var sql = "update license_table set license_exist = ? where license_id = ?";
         var n = jdbc.update(sql, 0, selectedLicenseId);
+        System.out.println("license削除件数：" + n);
         return n;
     }
 

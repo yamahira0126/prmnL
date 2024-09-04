@@ -77,6 +77,14 @@ public class SelectLicense extends MainMenu {
                      }
                  };
                  listItem.add(toUpdateLicense);
+
+                 var toDeleteLicense = new Link<>("toDeleteLicense") {
+                     @Override
+                     public void onClick() {
+                         setResponsePage(new DeleteLicense(license));
+                     }
+                 };
+                 listItem.add(toDeleteLicense);
              }
          };
          add(licensesLV);
