@@ -56,6 +56,7 @@ public class BudgetService implements IBudgetService{
     @Override
     public void deleteBudget(Integer selectedBudgetId) {
         int n = budgetRepos.delete(selectedBudgetId);
+        budgetSectionRepos.delete(selectedBudgetId);
         System.out.println("記録行数：" + n);
     }
 

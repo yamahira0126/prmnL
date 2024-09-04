@@ -14,8 +14,15 @@ public class BudgetSectionRepository implements IBudgetSectionRepository{
 
     @Override
     public int insert(Integer budgetId, Integer sectionId) {
-        var sql = "insert into budget_section_table values(?, ?)";
+        var sql = "insert into budget_section_table(budget_id, section_id) values(?, ?)";
         var n = jdbc.update(sql, budgetId, sectionId);
+        return n;
+    }
+
+    @Override
+    public int delete(Integer budgetId) {
+        var sql = "update budget_section_table set budget_section_exist = 0 where budget_id = ?";
+        var n = jdbc.update(sql, budgetId);
         return n;
     }
 }

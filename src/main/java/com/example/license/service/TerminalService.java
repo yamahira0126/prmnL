@@ -44,6 +44,7 @@ public class TerminalService implements  ITerminalService{
     @Override
     public void deleteTerminal(Integer selectedTerminalId) {
         int n = terminalRepos.delete(selectedTerminalId);
+        terminalSectionRepos.delete(selectedTerminalId);
         System.out.println("記録行数：" + n);
     }
 
