@@ -124,6 +124,7 @@ public class DeleteLicense extends SelectLicense{
             protected void onInitialize() {
                 // このDropDownChoiceの初期化用の処理
                 super.onInitialize();
+                setModelObject(selectedLicense.getLicenseStartDate());
                 // 空欄の選択肢の送信を許可しないバリデーション
                 setRequired(true);
                 // エラーメッセージに表示する名前を設定
@@ -137,6 +138,7 @@ public class DeleteLicense extends SelectLicense{
             protected void onInitialize() {
                 // このDropDownChoiceの初期化用の処理
                 super.onInitialize();
+                setModelObject(selectedLicense.getLicenseEndDate());
                 // 空欄の選択肢の送信を許可しないバリデーション
                 setRequired(true);
                 // エラーメッセージに表示する名前を設定
@@ -192,6 +194,7 @@ public class DeleteLicense extends SelectLicense{
             protected void onInitialize() {
                 // このDropDownChoiceの初期化用の処理
                 super.onInitialize();
+                setModelObject(selectedLicense.getSerialCode());
                 // 空欄の選択肢の送信を許可しないバリデーション
                 setRequired(true);
                 // エラーメッセージに表示する名前を設定
@@ -205,6 +208,7 @@ public class DeleteLicense extends SelectLicense{
             protected void onInitialize() {
                 // このDropDownChoiceの初期化用の処理
                 super.onInitialize();
+                setModelObject(selectedLicense.getLicenseNumber().toString());
                 // 空欄の選択肢の送信を許可しないバリデーション
                 setRequired(true);
                 // エラーメッセージに表示する名前を設定
