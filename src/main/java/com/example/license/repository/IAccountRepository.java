@@ -21,5 +21,6 @@ public interface IAccountRepository {
     public int change(Integer selectedAccountId, String accountName, String accountPass);
     public int delete(Integer selectedAccountId);
     public List<Account> find();
+    public List<Account> find(Account account);
 
 }

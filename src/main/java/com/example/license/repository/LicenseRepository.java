@@ -22,7 +22,7 @@ public class LicenseRepository implements ILicenseRepository{
     }
 
     @Override
-    public Integer insert(String softwareId, Date licenseStartDate, Date licenseEndDate, String budgetId, String terminalId, String accountId, String serialCode, String licenseNumber) {
+    public Integer insert(Integer softwareId, Date licenseStartDate, Date licenseEndDate, Integer budgetId, Integer terminalId, Integer accountId, String serialCode, String licenseNumber) {
         var sql = "insert into license_table(software_id, license_start_date, license_end_date, budget_id, terminal_id, account_id, serial_code, license_number) values(?, ?, ?, ?, ?, ?, ?, ?)";
         //licenseの追加
         var n = jdbc.update(sql, softwareId, licenseStartDate, licenseEndDate, budgetId, terminalId, accountId, serialCode, licenseNumber);
@@ -35,7 +35,7 @@ public class LicenseRepository implements ILicenseRepository{
     }
 
     @Override
-    public int change(Integer selectedLicenseId, String softwareId, Date licenseStartDate, Date licenseEndDate, String budgetId, String terminalId, String accountId, String serialCode, String licenseNumber) {
+    public int change(Integer selectedLicenseId, Integer softwareId, Date licenseStartDate, Date licenseEndDate, Integer budgetId, Integer terminalId, Integer accountId, String serialCode, String licenseNumber) {
         var sql = "update license_table set software_id = ?, license_start_date = ?, license_end_date = ?, budget_id = ?, terminal_id = ?, account_id = ?, serial_code = ?, license_number = ? where license_Id = ?";
         var n = jdbc.update(sql, softwareId, licenseStartDate, licenseEndDate, budgetId, terminalId, accountId, serialCode, licenseNumber ,selectedLicenseId);
         return n;

@@ -2,10 +2,7 @@ package com.example.license.service;
 
 import com.example.license.data.Account;
 import com.example.license.data.Section;
-import com.example.license.repository.AccountSectionRepository;
-import com.example.license.repository.IAccountRepository;
-import com.example.license.repository.IAccountSectionRepository;
-import com.example.license.repository.ISectionRepository;
+import com.example.license.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,5 +69,14 @@ public class AccountService implements IAccountService{
         System.out.println("データ件数：" + accounts.size());
         return accounts;
     }
+
+    @Override
+    public List<Account> findAccounts(Account account) {
+        var accounts = accountRepos.find(account);
+        System.out.println("データ件数 findAccounts(account):" + accounts);
+        return accounts;
+    }
+
+
 
 }

@@ -2,8 +2,10 @@ package com.example.license.page.license;
 
 
 import com.example.license.MySession;
+import com.example.license.data.Account;
 import com.example.license.data.Budget;
 import com.example.license.data.Software;
+import com.example.license.data.Terminal;
 import com.example.license.service.*;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
@@ -36,31 +38,34 @@ public class MakeLicense extends SelectLicense{
 
     public MakeLicense() {
 
-//        var selectionSoftwareModel = LoadableDetachableModel.of(() -> softwareService.findSoftwares(MySession.get().getAccount()));
-//        var selectedSoftwareModel = new Model<Software>();
-        Model<String> softwareIdModel = Model.of();
+        var selectionSoftwareModel = LoadableDetachableModel.of(() -> softwareService.findSoftwares(MySession.get().getAccount()));
+        var selectedSoftwareModel = new Model<Software>();
         Model<Date> licenseStartDateModel = Model.of(new Date());
         Model<Date> licenseEndDateModel = Model.of(new Date());
         var selectionBudgetModel = LoadableDetachableModel.of(() -> budgetService.findBudgets(MySession.get().getAccount()));
         var selectedBudgetModel = new Model<Budget>();
-        Model<String> terminalIdModel = Model.of();
-        Model<String> accountIdModel = Model.of();
+        var selectionTerminalModel = LoadableDetachableModel.of(() -> terminalService.findTerminals(MySession.get().getAccount()));
+        var selectedTerminalModel = new Model<Terminal>();
+        var selectionAccountModel = LoadableDetachableModel.of(() -> accountService.findAccounts(MySession.get().getAccount()));
+        var selectedAccountModel = new Model<Account>();
         Model<String> serialCodeModel = Model.of();
         Model<String> licenseNumberModel = Model.of();
         //Model<File> licenseRemarksModel = Model.of();
 
         var rendererBudget = new ChoiceRenderer<>("budgetName");
-        //var rendererSoftware = new ChoiceRenderer<>("softwareName");
+        var rendererSoftware = new ChoiceRenderer<>("softwareName");
+        var rendererTerminal = new ChoiceRenderer<>("terminalName");
+        var rendererAccount = new  ChoiceRenderer<>("accountName");
 
         var licenseInfoForm = new Form<>("licenseInfo") {
             @Override
             protected void onSubmit() {
-                var softwareId = softwareIdModel.getObject();
+                var softwareId = selectedSoftwareModel.getObject().getSoftwareId();
                 Date licenseStartDate = licenseStartDateModel.getObject();
                 Date licenseEndDate = licenseEndDateModel.getObject();
-                var budgetId = selectedBudgetModel.getObject().getBudgetId().toString();
-                var terminalId = terminalIdModel.getObject();
-                var accountId = accountIdModel.getObject();
+                var budgetId = selectedBudgetModel.getObject().getBudgetId();
+                var terminalId = selectedTerminalModel.getObject().getTerminalId();
+                var accountId = selectedAccountModel.getObject().getAccountId();
                 var serialCode = serialCodeModel.getObject();
                 var licenseNumber = licenseNumberModel.getObject();
 
@@ -89,7 +94,7 @@ public class MakeLicense extends SelectLicense{
         };
         add(licenseInfoForm);
 
-        var softwareIdField = new TextField<>("softwareId", softwareIdModel){
+        var softwareSelection = new DropDownChoice<>("softwareId", selectedSoftwareModel, selectionSoftwareModel, rendererSoftware) {
             @Override
             protected void onInitialize() {
                 // このDropDownChoiceの初期化用の処理
@@ -97,10 +102,10 @@ public class MakeLicense extends SelectLicense{
                 // 空欄の選択肢の送信を許可しないバリデーション
                 setRequired(true);
                 // エラーメッセージに表示する名前を設定
-                setLabel(Model.of("予算IDの選択肢"));
+                setLabel(Model.of("ソフトウェアIDの選択肢"));
             }
         };
-        licenseInfoForm.add(softwareIdField);
+        licenseInfoForm.add(softwareSelection);
 
         var licenseStartDateField = new DateTextField("licenseStartDate", licenseStartDateModel, "yyyy-MM-dd"){
             @Override
@@ -141,7 +146,7 @@ public class MakeLicense extends SelectLicense{
         };
         licenseInfoForm.add(budgetSelection);
 
-        var terminalIdField = new TextField<>("terminalId", terminalIdModel) {
+        var terminalISelection = new DropDownChoice<>("terminalId", selectedTerminalModel, selectionTerminalModel, rendererTerminal) {
             @Override
             protected void onInitialize() {
                 // このDropDownChoiceの初期化用の処理
@@ -152,9 +157,9 @@ public class MakeLicense extends SelectLicense{
                 setLabel(Model.of("端末IDの選択肢"));
             }
         };
-        licenseInfoForm.add(terminalIdField);
+        licenseInfoForm.add(terminalISelection);
 
-        var accountIdField = new TextField<>("accountId", accountIdModel) {
+        var accountSelection = new DropDownChoice<>("accountId", selectedAccountModel, selectionAccountModel, rendererAccount) {
             @Override
             protected void onInitialize() {
                 // このDropDownChoiceの初期化用の処理
@@ -165,7 +170,7 @@ public class MakeLicense extends SelectLicense{
                 setLabel(Model.of("アカウントIDの選択肢"));
             }
         };
-        licenseInfoForm.add(accountIdField);
+        licenseInfoForm.add(accountSelection);
 
         var serialCodeField = new TextField<>("serialCode", serialCodeModel) {
             @Override

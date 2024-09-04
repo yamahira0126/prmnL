@@ -77,4 +77,18 @@ public class AccountRepository implements IAccountRepository{
         return accounts;
     }
 
+    @Override
+    public List<Account> find(Account account) {
+        var accountId = account.getAccountId();
+        //accountId=sectionId=budgetIdかつbudget_exist=1で検索
+        String sql = "select account_table.account_id, account_table.account_name, account_table.account_pass "
+                + " from account_section_table"
+                + " inner join account_table"
+                + " on account_table.account_id = account_section_table.account_id"
+                + " where account_table.account_id = ?"
+                + " and account_exist = 1";
+        List<Account> accounts = jdbc.query(sql, DataClassRowMapper.newInstance(Account.class), accountId);
+        return accounts;
+    }
+
 }

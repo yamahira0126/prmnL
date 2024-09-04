@@ -25,4 +25,5 @@ public interface IAccountService {
     public void renewalAccount(Integer selectedAccountId, String accountName, String accountPassword, Section section);
     public void deleteAccount(Integer selectedAccountId);
     public List<Account> findAccounts();
+    public List<Account> findAccounts(Account account);
 }
