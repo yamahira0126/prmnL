@@ -6,6 +6,8 @@ import com.example.license.page.budget.SelectBudget;
 import com.example.license.page.license.SelectLicense;
 import com.example.license.page.software.SelectSoftware;
 import com.example.license.page.terminal.SelectTerminal;
+import org.apache.wicket.authroles.authorization.strategies.role.Roles;
+import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
@@ -16,6 +18,7 @@ import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import org.wicketstuff.annotation.mount.MountPath;
 
+@AuthorizeInstantiation(Roles.USER)
 @MountPath("MainMenu")
 public class MainMenu extends WebPage {
 
