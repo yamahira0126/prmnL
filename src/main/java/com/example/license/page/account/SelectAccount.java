@@ -1,6 +1,5 @@
 package com.example.license.page.account;
 
-import com.example.license.MySession;
 import com.example.license.data.Account;
 import com.example.license.data.Section;
 import com.example.license.page.common.MainMenu;
