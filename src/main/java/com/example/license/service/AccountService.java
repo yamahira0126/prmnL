@@ -42,16 +42,16 @@ public class AccountService implements IAccountService{
     }
 
     @Override
-    public void registerAccount(String accountName, String accountPass, Section section) {
-        int accountId = accountRepos.insert(accountName, accountPass);
+    public void registerAccount(String accountName, String accountPass, String accountMailAddress, Section section) {
+        int accountId = accountRepos.insert(accountName, accountPass, accountMailAddress);
         System.out.println("アカウントID：" + accountId);
         System.out.println("sectionID：" + section.getSectionId());
         accountSectionRepos.insert(accountId, section.getSectionId());
     }
 
     @Override
-    public void renewalAccount(Integer selectedAccountId, String accountName, String accountPassword, Section section){
-        int n = accountRepos.change(selectedAccountId, accountName, accountPassword);
+    public void renewalAccount(Integer selectedAccountId, String accountName, String accountPassword, String accountMailAddress, Section section){
+        int n = accountRepos.change(selectedAccountId, accountName, accountPassword, accountMailAddress);
         accountSectionRepos.change(selectedAccountId, section.getSectionId());
         System.out.println("記録行数：" + n);
     }

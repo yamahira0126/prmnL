@@ -47,9 +47,9 @@ public class AccountRepository implements IAccountRepository{
     }
 
     @Override
-    public int insert(String accountName, String accountPass) {
-        var sql = "insert into account_table(account_name, account_pass) values (?, ?)";
-        jdbc.update(sql, accountName, accountPass);
+    public int insert(String accountName, String accountPass, String accountMailAddress) {
+        var sql = "insert into account_table(account_name, account_pass, account_mail_address) values (?, ?, ?)";
+        jdbc.update(sql, accountName, accountPass, accountMailAddress);
         var idSql = "select * from account_table order by account_id desc";
         var account = jdbc.query(idSql, DataClassRowMapper.newInstance(Account.class));
         int accountId = account.get(0).getAccountId();
@@ -57,9 +57,9 @@ public class AccountRepository implements IAccountRepository{
     }
 
     @Override
-    public int change(Integer selectedAccountId, String accountName, String accountPass) {
-        var sql = "update account_table set account_name = ?, account_pass = ? where account_id = ?";
-        var n = jdbc.update(sql, accountName, accountPass, selectedAccountId);
+    public int change(Integer selectedAccountId, String accountName, String accountPass, String accountMailAddress) {
+        var sql = "update account_table set account_name = ?, account_pass = ?, account_mail_address = ? where account_id = ?";
+        var n = jdbc.update(sql, accountName, accountPass, accountMailAddress, selectedAccountId);
         return n;
     }
 

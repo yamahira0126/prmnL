@@ -17,8 +17,8 @@ public interface IAccountRepository {
 
     public List<Account> termsFind(String accountName, String accountPass);
 
-    public int insert(String accountName, String accountPass);
-    public int change(Integer selectedAccountId, String accountName, String accountPass);
+    public int insert(String accountName, String accountPass, String accountMaliAddress);
+    public int change(Integer selectedAccountId, String accountName, String accountPass, String accountMailAddress);
     public int delete(Integer selectedAccountId);
     public List<Account> find();
     public List<Account> find(Account account);
