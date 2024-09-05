@@ -648,6 +648,11 @@ ul.disc {padding: 0em 25px 15px 40px;list-style: disc;}
     padding: 0px; /* パディングを追加 */
     border: none; /* 各セルの枠線を消す */
 }
+/*.ta2 tr {*/
+/*    text-align: left; !* 左寄せに設定 *!*/
+/*    padding: 10px; !* パディングを追加 *!*/
+/*    border: none; !* 各セルの枠線を消す *!*/
+/*}*/
 .ta2 input {
     width: 100%; /* 幅を100%に設定してセル全体を使う */
     height: 40px; /* 高さを設定して大きくする */
