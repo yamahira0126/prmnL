@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:wicket="http://wicket.apache.org">
+    <head> <!--そもそも目に見える部分じゃないのがhead-->
+        <title>はじめての方へ</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> <!--ビューデザイン幅を端末に合わせる-->
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+        <link rel="stylesheet" href="../css/style.css">
+        <!--JavaScript ライブラリの読み込み-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+        <script src="../js/scroll.js"></script>
+        <!--作成したJavaScriptファイルの読み込み-->
+        <script src="humberger.js"></script>
+        <title>Account</title>
+
+        <link rel="stylesheet" href="../css/kawamuraStyle.css">
+</head>
+<body>
+
+<nav id="navi">
+    <ul class="nav-menu">
+        <li><a href="#saisho">はじめての方へ</a></li>
+        <li><a href="#home" wicket:id="toHome">ホーム</a></li>
+        <li><a href="#select" wicket:id="toBudget">予算</a></li>
+        <li><a href="#select" wicket:id="toTerminal">端末</a></li>
+        <li><a href="#select" wicket:id="toSoftware">ソフトウェア</a></li>
+        <li><a href="#License">ライセンス</a></li>
+        <li><a href="#activitylog">アクティビティログ</a></li>
+        <li><a href="#account">アカウント管理</a></li>
+    </ul>
+
+    <ul class="nav-sun">
+        <li><a href="https://youtu.be/YYCaJQ_8ImI?si=KdFZ93pCcBxioEE2" target="_blank">マイページ設定</a></li>
+        <li><a href="https://youtu.be/weYtEthD0kw?si=tGbGkszwRWt3gV_L" target="_blank">お問い合わせ</a></li>
+        <li><a href="#" target="_blank" wicket:id="logout">ログアウト</a></li>
+    </ul>
+</nav>
+
+<div class="toggle_btn">
+    <span></span>
+    <span></span>
+    <span></span>
+</div><div id="mask"></div>
+
+<wicket:extend>
+    <div id="container">
+        <div id="contents">
+<!-- コンテンツ部分 -->
+                <h3>はじめての方へ</h3>
+                <form action="#" wicket:id="saisho">
+                <p>このページでは、初めてご利用される方のために、システムの使い方をご説明します。</p>
+
+                <h3>1. 会員登録</h3>
+                <p>&emsp;&emsp;まずは会員登録を行ってください。会員登録には、メールアドレス(@前がidとして設定される)とパスワードが必要です。</p>
+                <p>&emsp;&emsp;今、登録を行うには、以下のメールアドレスに連絡ください。</p>
+                <p class="c">
+                    <a href="mailto:cistlicense@gmail.com" class="email-link">
+                        <i class="fas fa-envelope"></i> <!-- メールアイコン -->
+                        cistlicense@gmail.com
+                    </a>
+                </p>
+
+                <h3>2. ログイン</h3>
+                <p>&emsp;&emsp;登録が完了したら、ログイン画面からid（メールアドレスの@前まで）とパスワードを使用してログインしてください。</p>
+
+                <h3>3. 予算</h3>
+                <p>&emsp;&emsp;ログイン後、DBにアクセスして、各種ライセンス管理機能を利用できます。詳しい操作方法は以下をご参照ください。</p>
+
+                <h3>4. サポート</h3>
+                <p>&emsp;&emsp;困ったことがあれば、メインメニューからお問い合わせいただけます。</p>
+
+                <!-- PDFボタン -->
+                    <button type="submit" class="printButton">このページをPDFに保存</button>
+            </section>
+
+            <script>
+                // 印刷機能を実装するJavaScript
+                document.getElementById('printButton').addEventListener('click', function() {
+                    window.print();
+                });
+            </script>
+        </div>
+    </div>
+</wicket:extend>
+</body>
+</html>

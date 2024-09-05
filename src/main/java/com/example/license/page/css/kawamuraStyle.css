@@ -718,6 +718,20 @@ ul.disc {padding: 0em 25px 15px 40px;list-style: disc;}
     transition: background-color 0.3s; /* ホバー時の背景色の変化をスムーズに */
 }
 
+.printButton {
+    width: 250px;
+    height: 40px;
+    color: white; /* テキストの色を白に設定 */
+    background-color: forestgreen; /* 背景色を赤に設定 */
+    border: none; /* ボーダーを無しに設定 */
+    padding: 10px 20px; /* 内側余白の設定 */
+    margin-left: 15px;  /* 外側余白の設定 */
+    margin-top: 15px;
+    font-size: 16px; /* フォントサイズの設定 */
+    cursor: pointer; /* カーソルをポインタに設定 */
+    transition: background-color 0.3s; /* ホバー時の背景色の変化をスムーズに */
+}
+
 
 
 
@@ -783,6 +797,50 @@ ul.disc {padding: 0em 25px 15px 40px;list-style: disc;}
     }
     ol {
         padding: 0 0px 20px 35px;
+    }
+
+    /* はじめての方へセクション
+    ---------------------------------------------------------------------------*/
+
+    section#saisho {
+        margin: 20px;
+        padding: 20px;
+        background-color: #f0f8ff;
+        border-radius: 10px;
+    }
+
+    section#saisho h2 {
+        color: #005b99;
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    section#saisho h3 {
+        color: #003366;
+        font-size: 20px;
+        margin-top: 20px;
+    }
+
+    section#saisho p {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #333;
+    }
+
+    /* PDFボタンのスタイル */
+    #printButton {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #005b99;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    #printButton:hover {
+        background-color: #003366;
     }
 
     /*その他
