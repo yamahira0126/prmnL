@@ -11,14 +11,13 @@ public class Account implements Serializable {
     private final Integer accountId;
     private final String accountName;
     private final String accountPass;
+    private final String accountMailAddress;
 
-    //private final boolean exist;
-
-    public Account(Integer accountId,String accountName, String accountPass) {
+    public Account(Integer accountId,String accountName, String accountPass, String accountMailAddress) {
         this.accountId = accountId;
         this.accountName = accountName;
         this.accountPass = accountPass;
-        //this.exist = exist;
+        this.accountMailAddress = accountMailAddress;
     }
 
     public Integer getAccountId() {return accountId; }
@@ -31,6 +30,6 @@ public class Account implements Serializable {
         return accountPass;
     }
 
-    //public boolean getExist() {return exist;}
+    public String getAccountMailAddress() {return accountMailAddress;}
 
 }

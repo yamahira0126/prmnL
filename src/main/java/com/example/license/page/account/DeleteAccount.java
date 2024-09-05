@@ -27,6 +27,7 @@ public class DeleteAccount extends SelectAccount{
         //入力のためのモデル
         var accountNameModel = Model.of("");
         var accountPasswordModel = Model.of("");
+        var accountMailAddressModel = Model.of("");
         var selectionModel = LoadableDetachableModel.of(() -> sectionService.findSections());
         var selectedModel = new Model<Section>();
         var renderer = new ChoiceRenderer<>("sectionName");
@@ -38,6 +39,7 @@ public class DeleteAccount extends SelectAccount{
             protected void onSubmit() {
                 var accountName = accountNameModel.getObject();
                 var accountPassword = accountPasswordModel.getObject();
+                var accountMailAddress = accountMailAddressModel.getObject();
                 var section = selectedModel.getObject();
 //                //プルダウンじゃないバージョン
 //                var accountSection = accountSectionModel.getObject();
@@ -45,6 +47,8 @@ public class DeleteAccount extends SelectAccount{
                         + accountName
                         +","
                         + accountPassword
+                        +","
+                        + accountMailAddress
                         +","
                         + section;
 //                        //プルダウンじゃないバージョン
@@ -84,6 +88,20 @@ public class DeleteAccount extends SelectAccount{
             }
         };
         accountInfoForm.add(accountPasswordField);
+
+        var accountMailAddressField = new TextField<>("accountMailAddress", accountMailAddressModel){
+            @Override
+            protected void onInitialize() {
+                // このDropDownChoiceの初期化用の処理
+                super.onInitialize();
+                setModelObject(selectedAccount.getAccountMailAddress());
+                // 空欄の選択肢の送信を許可しないバリデーション
+                setRequired(true);
+                // エラーメッセージに表示する名前を設定
+                setLabel(Model.of("アカウントメールアドレスの選択肢"));
+            }
+        };
+        accountInfoForm.add(accountMailAddressField);
 
         //プルダウン
         var sectionSelection = new DropDownChoice<>("sectionName", selectedModel, selectionModel, renderer) {

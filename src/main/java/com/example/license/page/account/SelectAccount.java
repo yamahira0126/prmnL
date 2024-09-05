@@ -47,6 +47,10 @@ public class SelectAccount extends MainMenu {
                 var accountPasswordModel = Model.of(account.getAccountPass());
                 var accountPasswordLabel = new Label("accountPassword", accountPasswordModel);
                 listItem.add(accountPasswordLabel);
+
+                var accountMailAddressModel = Model.of(account.getAccountMailAddress());
+                var accountMailAddressLabel = new Label("accountMailAddress", accountMailAddressModel);
+                listItem.add(accountMailAddressLabel);
             }
         };
         add(accountsLV);

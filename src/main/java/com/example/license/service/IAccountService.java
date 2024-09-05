@@ -21,8 +21,8 @@ public interface IAccountService {
 
     public Account termsFindAccount(String accountName, String accountPass);
 
-    public void registerAccount(String accountName, String accountPassword, Section section);
-    public void renewalAccount(Integer selectedAccountId, String accountName, String accountPassword, Section section);
+    public void registerAccount(String accountName, String accountPassword, String accountMailAddress, Section section);
+    public void renewalAccount(Integer selectedAccountId, String accountName, String accountPassword, String accountMailAddress, Section section);
     public void deleteAccount(Integer selectedAccountId);
     public List<Account> findAccounts();
     public List<Account> findAccounts(Account account);
