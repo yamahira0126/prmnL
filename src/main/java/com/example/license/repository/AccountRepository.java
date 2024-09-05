@@ -81,7 +81,7 @@ public class AccountRepository implements IAccountRepository{
     public List<Account> find(Account account) {
         var accountId = account.getAccountId();
         //accountId=sectionId=budgetIdかつbudget_exist=1で検索
-        String sql = "select account_table.account_id, account_table.account_name, account_table.account_pass "
+        String sql = "select account_table.account_id, account_table.account_name, account_table.account_pass , account_table.account_mail_address"
                 + " from account_section_table"
                 + " inner join account_table"
                 + " on account_table.account_id = account_section_table.account_id"
