@@ -7,6 +7,8 @@ drop table if exists software_section_table;
 drop table if exists software_table;
 drop table if exists terminal_section_table;
 drop table if exists terminal_table;
+drop table if exists license_table;
+drop table if exists license_section_table;
 
 create table account_section_table(
                                       account_id integer primary key,
@@ -70,6 +72,25 @@ create table terminal_table(
                                terminal_remarks varchar(32),
                                terminal_exist integer default 1
 );
+
+create table license_table(
+                              license_id serial primary key,
+                              software_id integer,
+                              license_start_date date,
+                              license_end_date date,
+                              budget_id integer,
+                              terminal_id integer,
+                              account_id integer,
+                              serial_code varchar(32),
+                              license_number integer,
+                              license_exist integer default 1
+);
+
+create table license_section_table(
+                                      license_id integer primary key,
+                                      section_id integer
+);
+
 
 insert into account_table(account_name, account_pass, account_mail_address) values ('admin', '123', '@photon'),
                                                                                    ('media', '456', '@photon');
