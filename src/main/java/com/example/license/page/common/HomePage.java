@@ -6,6 +6,7 @@ import com.example.license.page.budget.SelectBudget;
 import com.example.license.page.license.SelectLicense;
 import com.example.license.page.software.SelectSoftware;
 import com.example.license.page.terminal.SelectTerminal;
+import com.example.license.page.saisho.Saisho;
 import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
@@ -47,6 +48,8 @@ public class HomePage extends WebPage {
         var loginNameModel = Model.of(loginName);
         var loginNameLabel = new Label("loginName", loginNameModel);
         add(loginNameLabel);
+        var toSaisho = new BookmarkablePageLink<>("toSaisho", Saisho.class);
+        add(toSaisho);
 
         var logout = new Link<>("logout"){
             @Override
