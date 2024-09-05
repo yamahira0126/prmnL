@@ -277,7 +277,7 @@ header #logo img {
 /*メニュー１個あたりの指定*/
 #menubar li {
     display: inline-block;
-    margin: 0 9%;
+    margin: 0 0%;
     animation-name: opa1;
     animation-delay: 1S;
     animation-duration: 1S;
