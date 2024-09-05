@@ -66,5 +66,6 @@ public class HomePage extends WebPage {
         response.render(JavaScriptHeaderItem.forUrl("https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"));
         response.render(JavaScriptHeaderItem.forUrl("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"));
         response.render(JavaScriptHeaderItem.forReference(new JavaScriptResourceReference(MainMenu.class, "../js/scroll.js")));
+        response.render(JavaScriptHeaderItem.forUrl("https://cdn.jsdelivr.net/npm/chart.js"));
     }
 }
