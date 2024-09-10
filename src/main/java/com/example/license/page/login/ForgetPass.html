@@ -7,17 +7,18 @@
 <body>
 <h1>パスワードをお忘れの方</h1>
 
-<div calss="form">
-  <form action="Comp.html" method="post" class="address-form">
-    <div class="form-mailaddress">
+<div class="form">
+  <form action="#" wicket:id="mailAddressInfo" class="address-form">
+    <div class="form-mail-address">
       <label>
         メールアドレス <br>
-        <input type="text" name="address" id="textAddress" required>
+        <input type="text" wicket:id="mailAddress">
       </label>
     </div>
     <div class="form-button">
       <button type="submit" class="submit-button">送信</button>
     </div>
+    <span wicket:id="feedback"></span>
   </form>
 </div>
 

@@ -51,14 +51,8 @@ public class Login extends WebPage{
         var loginPassField = new PasswordTextField("loginPass", loginPassModel);
         loginInfoForm.add(loginPassField);
 
-        var toForgetIdLink = new BookmarkablePageLink<>("toForgetId", ForgetId.class); //ID,Pass忘れのページ遷移
-        add(toForgetIdLink);
-
         var toForgetPassLink = new BookmarkablePageLink<>("toForgetPass", ForgetPass.class);
         add(toForgetPassLink);
-
-        var toForgetIdPassLink = new BookmarkablePageLink<>("toForgetIdPass", ForgetIdPass.class);
-        add(toForgetIdPassLink);
     }
 
     @Override

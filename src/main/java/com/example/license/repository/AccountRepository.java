@@ -89,4 +89,23 @@ public class AccountRepository implements IAccountRepository{
         return accounts;
     }
 
+    @Override
+    public boolean exists(String mailAddress){
+        var sql = "select true from account_table "
+                + "where account_mail_address = ? and account_exist = 1";
+
+        var booles = jdbc.query(sql,
+                SingleColumnRowMapper.newInstance(Boolean.class),
+                mailAddress);
+
+        return !booles.isEmpty();
+    }
+
+    @Override
+    public int changePassword(String mailAddress, String newPassword) {
+        var sql = "update account_table set account_pass = ? where account_mail_address = ?";
+        var n = jdbc.update(sql, newPassword, mailAddress);
+        return n;
+    }
+
 }
