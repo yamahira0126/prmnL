@@ -23,4 +23,7 @@ public interface IAccountRepository {
     public List<Account> find();
     public List<Account> find(Account account);
 
+    public boolean exists(String mailAddress);
+    public int changePassword(String mailAddress, String newPassword);
+
 }

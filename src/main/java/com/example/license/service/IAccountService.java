@@ -26,4 +26,7 @@ public interface IAccountService {
     public void deleteAccount(Integer selectedAccountId);
     public List<Account> findAccounts();
     public List<Account> findAccounts(Account account);
+
+    public boolean existsAccount(String mailAddress);
+    public void renewalPassword(String mailAddress, String newPassword);
 }

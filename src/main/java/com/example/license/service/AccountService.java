@@ -77,6 +77,17 @@ public class AccountService implements IAccountService{
         return accounts;
     }
 
+    @Override
+    public boolean existsAccount(String mailAddress){
+        var result = accountRepos.exists(mailAddress);
+        System.out.println(mailAddress + " のユーザ照合結果：" + result);
+        return result;
+    }
 
+    @Override
+    public void renewalPassword(String mailAddress, String newPassword) {
+        int n = accountRepos.changePassword(mailAddress, newPassword);
+        System.out.println("記録行数：" + n);
+    }
 
 }
