@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     const rowsPerPage = 10; // 1ページに表示する行数
     const searchBox = document.getElementById('search-box');
-    const tableRows = Array.from(document.querySelectorAll('tbody tr'));
+    const budgetTable = document.getElementById('searchTable'); // 追加
+    const tableRows = Array.from(budgetTable.querySelectorAll('tbody tr')); // 特定のテーブルの行を取得
     const pagination = document.getElementById('pagination');
 
     let filteredRows = [...tableRows]; // 検索結果を保持する変数（初期は全行）
@@ -52,8 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const searchTerm = searchBox.value.toLowerCase();
         // 検索結果をフィルタリング
         filteredRows = tableRows.filter(row => {
-            const cells = row.querySelectorAll('td span');
-            return Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(searchTerm));
+            const cells = row.querySelectorAll('td'); // 各セルを取得
+            return Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(searchTerm)); // `td` 全体を検索
         });
 
         // フィルタリング結果を表示
