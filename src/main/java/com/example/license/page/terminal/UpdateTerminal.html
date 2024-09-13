@@ -14,6 +14,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script src="../js/scroll.js"></script>
+    <script src="../js/paging.js"></script>
+    <script src="../js/sort.js"></script>
     <!--作成したJavaScriptファイルの読み込み-->
     <script src="humberger.js"></script>
     <title>Account</title>
@@ -52,7 +54,7 @@
             <div id="contents">
                 <h3>新規端末登録</h3>
                 <form action="#" wicket:id="terminalInfo">
-                    <table class="ta1">
+                    <table class="ta2">
                         <tr>
                             <th>端末名称（教室）</th><td><input type="text" wicket:id="terminalName"></td>
                         </tr>
@@ -63,7 +65,7 @@
                             <th>備考</th><td><input type="text" wicket:id="terminalRemarks"></td>
                         </tr>
                     </table>
-                    <button type="submit">登録</button>
+                    <button type="submit" class="update-button">登録</button>
                     <span wicket:id="feedback"></span>
                 </form>
             </div>

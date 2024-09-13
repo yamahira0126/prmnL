@@ -85,7 +85,6 @@ public class SelectBudget extends MainMenu {
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
         response.render(JavaScriptHeaderItem.forReference(new JavaScriptResourceReference(SelectBudget.class, "../js/sort.js")));
-        response.render(JavaScriptHeaderItem.forReference(new JavaScriptResourceReference(SelectBudget.class, "../js/search.js")));
         response.render(JavaScriptHeaderItem.forReference(new JavaScriptResourceReference(SelectBudget.class, "../js/paging.js")));
     }
 }
