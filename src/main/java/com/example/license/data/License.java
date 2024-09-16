@@ -13,8 +13,10 @@ public class License implements Serializable {
     private Integer accountId;
     private String serialCode;
     private Integer licenseNumber;
+    private String licenseRemarksName;
+    private byte[] licenseRemarksData;
 
-    public License(Integer licenseId, Integer softwareId, Date licenseStartDate, Date licenseEndDate, Integer budgetId, Integer terminalId, Integer accountId, String serialCode, Integer licenseNumber) {
+    public License(Integer licenseId, Integer softwareId, Date licenseStartDate, Date licenseEndDate, Integer budgetId, Integer terminalId, Integer accountId, String serialCode, Integer licenseNumber, String licenseRemarksName, byte[] licenseRemarksData) {
         this.licenseId = licenseId;
         this.softwareId = softwareId;
         this.licenseStartDate = licenseStartDate;
@@ -24,6 +26,8 @@ public class License implements Serializable {
         this.accountId = accountId;
         this.serialCode = serialCode;
         this.licenseNumber = licenseNumber;
+        this.licenseRemarksName = licenseRemarksName;
+        this.licenseRemarksData = licenseRemarksData;
     }
 
     public Integer getLicenseId() {return licenseId;}
@@ -35,5 +39,7 @@ public class License implements Serializable {
     public Integer getAccountId() {return accountId;}
     public String getSerialCode() {return serialCode;}
     public Integer getLicenseNumber() {return licenseNumber;}
+    public String getLicenseRemarksName() {return licenseRemarksName;}
+    public byte[] getLicenseRemarksData() {return licenseRemarksData;}
 
 }

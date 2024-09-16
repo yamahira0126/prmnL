@@ -15,9 +15,11 @@ public interface ILicenseService {
                                 Integer accountId,
                                 String serialCode,
                                 String licenseNumber,
+                                String licenseRemarksName,
+                                byte[] licenseRemarksData,
                                 Account account);
 
-    public void renewal(Integer selectedLicenseId, Integer softwareId, Date licenseStartDate, Date licenseEndDate, Integer budgetId, Integer terminalId, Integer accountId, String serialCode, String licenseNumber);
+    public void renewal(Integer selectedLicenseId, Integer softwareId, Date licenseStartDate, Date licenseEndDate, Integer budgetId, Integer terminalId, Integer accountId, String serialCode, String licenseNumber, String licenseRemarksName, byte[] licenseRemarksData);
     public void deleteLicense(Integer selectedLicenseId);
     public List<License> findLicenses(Account account);
 }

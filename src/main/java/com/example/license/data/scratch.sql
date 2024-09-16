@@ -83,6 +83,8 @@ create table license_table(
                               account_id integer,
                               serial_code varchar(32),
                               license_number integer,
+                              license_remarks_name varchar(128),
+                              license_remarks_data bytea,
                               license_exist integer default 1
 );
 

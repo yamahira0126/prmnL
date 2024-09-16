@@ -8,6 +8,7 @@ import com.example.license.service.*;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.markup.html.link.ResourceLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.Model;
@@ -98,6 +99,10 @@ public class SelectLicense extends MainMenu {
                  var licenseNumberModel = Model.of(license.getLicenseNumber());
                  var licenseNumberLabel = new Label("licenseNumber", licenseNumberModel);
                  listItem.add(licenseNumberLabel);
+
+                 ResourceLink<Void> link = new ResourceLink<>("licenseRemarksData", new PdfDownloadResource(license.getLicenseRemarksData()));
+                 link.add(new Label("licenseRemarksName", license.getLicenseRemarksName()));
+                 listItem.add(link);
 
                  var toUpdateLicense = new Link<>("toUpdateLicense") {
                      @Override
