@@ -36,9 +36,9 @@ public class LicenseService implements ILicenseService {
 //    }
 
     @Override
-    public void registerLicense(Integer softwareId, Date licenseStartDate, Date licenseEndDate, Integer budgetId, Integer terminalId, Integer accountId, String serialCode, String licenseNumber, Account account) {
+    public void registerLicense(Integer softwareId, Date licenseStartDate, Date licenseEndDate, Integer budgetId, Integer terminalId, Integer accountId, String serialCode, String licenseNumber, String licenseRemarksName, byte[] licenseRemarksData, Account account) {
         //budgetの追加と追加したbudgetのIDをreturn
-        int licenseId = licenseRepos.insert(softwareId, licenseStartDate, licenseEndDate, budgetId, terminalId, accountId, serialCode, licenseNumber);
+        int licenseId = licenseRepos.insert(softwareId, licenseStartDate, licenseEndDate, budgetId, terminalId, accountId, serialCode, licenseNumber, licenseRemarksName, licenseRemarksData);
         System.out.println("ライセンスID：" + licenseId);
         Integer sectionId = accountSectionRepos.findSectionId(account.getAccountId());
         System.out.println("sectionID:" + sectionId);
@@ -47,8 +47,8 @@ public class LicenseService implements ILicenseService {
     }
 
     @Override
-    public void renewal(Integer selectedLicenseId, Integer softwareId, Date licenseStartDate, Date licenseEndDate, Integer budgetId, Integer terminalId, Integer accountId, String serialCode, String licenseNumber){
-        int n = licenseRepos.change(selectedLicenseId, softwareId, licenseStartDate, licenseEndDate, budgetId, terminalId, accountId, serialCode, licenseNumber);
+    public void renewal(Integer selectedLicenseId, Integer softwareId, Date licenseStartDate, Date licenseEndDate, Integer budgetId, Integer terminalId, Integer accountId, String serialCode, String licenseNumber, String licenseRemarksName, byte[] licenseRemarksData){
+        int n = licenseRepos.change(selectedLicenseId, softwareId, licenseStartDate, licenseEndDate, budgetId, terminalId, accountId, serialCode, licenseNumber, licenseRemarksName, licenseRemarksData);
         System.out.println("記録行数：" + n);
     }
 

@@ -22,10 +22,10 @@ public class LicenseRepository implements ILicenseRepository{
     }
 
     @Override
-    public Integer insert(Integer softwareId, Date licenseStartDate, Date licenseEndDate, Integer budgetId, Integer terminalId, Integer accountId, String serialCode, String licenseNumber) {
-        var sql = "insert into license_table(software_id, license_start_date, license_end_date, budget_id, terminal_id, account_id, serial_code, license_number) values(?, ?, ?, ?, ?, ?, ?, ?)";
+    public Integer insert(Integer softwareId, Date licenseStartDate, Date licenseEndDate, Integer budgetId, Integer terminalId, Integer accountId, String serialCode, String licenseNumber, String licenseRemarksName, byte[] licenseRemarksData) {
+        var sql = "insert into license_table(software_id, license_start_date, license_end_date, budget_id, terminal_id, account_id, serial_code, license_number, license_remarks_name, license_remarks_data) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         //licenseの追加
-        var n = jdbc.update(sql, softwareId, licenseStartDate, licenseEndDate, budgetId, terminalId, accountId, serialCode, licenseNumber);
+        var n = jdbc.update(sql, softwareId, licenseStartDate, licenseEndDate, budgetId, terminalId, accountId, serialCode, licenseNumber, licenseRemarksName, licenseRemarksData);
         var idSql = "select * from license_table order by license_id desc";
         //IDを降順に並び替える（新規予算は必ずIDが一番大きくなる）
         var license = jdbc.query(idSql, DataClassRowMapper.newInstance(License.class));
@@ -35,9 +35,9 @@ public class LicenseRepository implements ILicenseRepository{
     }
 
     @Override
-    public int change(Integer selectedLicenseId, Integer softwareId, Date licenseStartDate, Date licenseEndDate, Integer budgetId, Integer terminalId, Integer accountId, String serialCode, String licenseNumber) {
-        var sql = "update license_table set software_id = ?, license_start_date = ?, license_end_date = ?, budget_id = ?, terminal_id = ?, account_id = ?, serial_code = ?, license_number = ? where license_Id = ?";
-        var n = jdbc.update(sql, softwareId, licenseStartDate, licenseEndDate, budgetId, terminalId, accountId, serialCode, licenseNumber ,selectedLicenseId);
+    public int change(Integer selectedLicenseId, Integer softwareId, Date licenseStartDate, Date licenseEndDate, Integer budgetId, Integer terminalId, Integer accountId, String serialCode, String licenseNumber, String licenseRemarksName, byte[] licenseRemarksData) {
+        var sql = "update license_table set software_id = ?, license_start_date = ?, license_end_date = ?, budget_id = ?, terminal_id = ?, account_id = ?, serial_code = ?, license_number = ?, license_remarks_name = ?, license_remarks_data = ? where license_Id = ?";
+        var n = jdbc.update(sql, softwareId, licenseStartDate, licenseEndDate, budgetId, terminalId, accountId, serialCode, licenseNumber, licenseRemarksName, licenseRemarksData, selectedLicenseId);
         return n;
     }
 
@@ -62,7 +62,7 @@ public class LicenseRepository implements ILicenseRepository{
     public List<License> find(Account account) {
         var accountId = account.getAccountId();
         //accountId=sectionId=licenseIdで検索
-        String sql = "select license_table.license_id, software_id, license_start_date, license_end_date, budget_id, terminal_id, license_table.account_id, serial_code, license_number"
+        String sql = "select license_table.license_id, software_id, license_start_date, license_end_date, budget_id, terminal_id, license_table.account_id, serial_code, license_number, license_remarks_name, license_remarks_data"
                 + " from account_section_table"
                 + " inner join license_section_table"
                 + " on account_section_table.section_id = license_section_table.section_id"

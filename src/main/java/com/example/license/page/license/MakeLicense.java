@@ -35,6 +35,7 @@ public class MakeLicense extends SelectLicense{
     private ITerminalService terminalService;
     @SpringBean
     private IAccountService accountService;
+    private FileUploadField fileUploadField;
 
     public MakeLicense() {
 
@@ -68,6 +69,7 @@ public class MakeLicense extends SelectLicense{
                 var accountId = selectedAccountModel.getObject().getAccountId();
                 var serialCode = serialCodeModel.getObject();
                 var licenseNumber = licenseNumberModel.getObject();
+                FileUpload upload = fileUploadField.getFileUpload();
 
                 var msg = "送信データ"
                         + softwareId
@@ -88,6 +90,8 @@ public class MakeLicense extends SelectLicense{
                         accountId,
                         serialCode,
                         licenseNumber,
+                        upload.getClientFileName(),
+                        upload.getBytes(),
                         MySession.get().getAccount());
                 setResponsePage(new MakeLicense());
             }
@@ -198,6 +202,8 @@ public class MakeLicense extends SelectLicense{
         };
         licenseInfoForm.add(licenseNumberField);
 
+        fileUploadField = new FileUploadField("fileUpload");
+        licenseInfoForm.add(fileUploadField);
 
     }
 }
