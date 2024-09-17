@@ -1,12 +1,23 @@
 //http://localhost:8080/MakeBudget
 package com.example.license.page;
 
+import com.example.license.MySession;
+import com.example.license.data.File;
+import com.example.license.data.License;
 import com.example.license.page.common.MainMenu;
+import com.example.license.repository.FileUploadRepository;
 import com.example.license.service.EmailService;
+import com.example.license.service.PdfDownloadResource;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.*;
+import org.apache.wicket.markup.html.form.upload.FileUpload;
+import org.apache.wicket.markup.html.form.upload.FileUploadField;
+import org.apache.wicket.markup.html.link.ResourceLink;
+import org.apache.wicket.markup.html.list.ListItem;
+import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
@@ -15,6 +26,7 @@ import org.wicketstuff.annotation.mount.MountPath;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 @MountPath("prt")
@@ -22,6 +34,9 @@ public class SelectPrt extends MainMenu {
 
     @SpringBean
     private EmailService emailService;
+    private FileUploadField fileUploadField;
+    @SpringBean
+    private FileUploadRepository fileUploadRepository;
 
     public SelectPrt() {
 
@@ -33,9 +48,31 @@ public class SelectPrt extends MainMenu {
         Model<Date> budgetEndDateModel = Model.of();
         Model<Date> budgetReminderDateModel = Model.of();
 
+        List<File> files = fileUploadRepository.findFile(MySession.get().getAccount().getAccountId());
+        ListView<File> listView = new ListView<File>("files", files) {
+            @Override
+            protected void populateItem(ListItem<File> listItem) {
+                File file = listItem.getModelObject();
+                ResourceLink<Void> link = new ResourceLink<>("downloadLink", new PdfDownloadResource(file.getFileData()));
+                link.add(new Label("fileName", file.getFileName()));
+                listItem.add(link);
+
+                var fileIdModel = Model.of(file.getId());
+                var fileIdLabel = new Label("fileId", fileIdModel.getObject());
+                listItem.add(fileIdLabel);
+            }
+        };
+        add(listView);
+
         Form<Void> budgetInfoForm = new Form<>("budgetInfo") {
             @Override
             protected void onSubmit() {
+                List<FileUpload> uploads = fileUploadField.getFileUploads();
+                if (uploads != null) {
+                    for (FileUpload upload : uploads) {
+                        fileUploadRepository.setToDatabese(upload);
+                    }
+                }
                 System.out.printf("送信データ: %s, %s, %s, %s, %s%n",
                         budgetName1Model.getObject(),
                         budgetName2Model.getObject(),
@@ -43,7 +80,7 @@ public class SelectPrt extends MainMenu {
                         budgetEndDateModel.getObject(),
                         budgetReminderDateModel.getObject());
                 setResponsePage(new SelectPrt());
-                emailService.sendSimpleEmail(budgetName2Model.getObject(), "test", "TEST");
+//                emailService.sendSimpleEmail(budgetName2Model.getObject(), "test", "TEST");
             }
 
             @Override
@@ -56,7 +93,14 @@ public class SelectPrt extends MainMenu {
                 }
             }
         };
+
+
+        fileUploadField = new FileUploadField("fileUpload");
+        budgetInfoForm.add(fileUploadField);
         add(budgetInfoForm);
+
+        add(budgetInfoForm);
+
 
         //budgetName1Fieldのテキストボックスの設定
         var budgetName1Field = new TextField<>("budgetName1", budgetName1Model){

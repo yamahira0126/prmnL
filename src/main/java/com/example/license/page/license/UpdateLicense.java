@@ -8,6 +8,8 @@ import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.form.upload.FileUpload;
+import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
@@ -29,6 +31,9 @@ public class UpdateLicense extends SelectLicense {
     private ITerminalService terminalService;
     @SpringBean
     private IAccountService accountService;
+    private FileUploadField fileUploadField;
+
+
 
     public UpdateLicense(License selectedLicense) {
 
@@ -83,6 +88,8 @@ public class UpdateLicense extends SelectLicense {
                 var accountId = selectedAccountModel.getObject().getAccountId();
                 var serialCode = serialCodeModel.getObject();
                 var licenseNumber = licenseNumberModel.getObject();
+                FileUpload upload = fileUploadField.getFileUpload();
+
 
                 var msg = "送信データ"
                         + softwareId
@@ -103,7 +110,9 @@ public class UpdateLicense extends SelectLicense {
                         terminalId,
                         accountId,
                         serialCode,
-                        licenseNumber);
+                        licenseNumber,
+                        upload.getClientFileName(),
+                        upload.getBytes());
                 setResponsePage(new SelectLicense());
             }
         };
@@ -221,5 +230,7 @@ public class UpdateLicense extends SelectLicense {
         };
         licenseInfoForm.add(licenseNumberField);
 
+        fileUploadField = new FileUploadField("fileUpload");
+        licenseInfoForm.add(fileUploadField);
     }
 }

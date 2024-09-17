@@ -14,6 +14,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script src="../js/scroll.js"></script>
+    <script src="../js/paging.js"></script>
+    <script src="../js/sort.js"></script>
     <!--作成したJavaScriptファイルの読み込み-->
     <script src="humberger.js"></script>
     <title>Account</title>
@@ -53,19 +55,22 @@
                 <div id="contents">
                     <h2>License</h2>
                     <h3>ライセンス一覧</h3>
-                    <table class="ta2">
+                    <div class="search-wrap">
+                        <input type="search" id="search-box" class="search" placeholder="検索...">
+                    </div>
+                    <table id="searchTable" class="ta2">
                         <thead>
                         <tr>
-                            <th>ライセンスID</th>
-                            <th>ソフトウェアID</th>
-                            <th>開始日</th>
-                            <th>終了日</th>
-                            <th>予算ID</th>
-                            <th>端末ID</th>
-                            <th>アカウントID</th>
-                            <th>シリアルコード</th>
-                            <th>台数</th>
-                            <th>備考アップロード</th>
+                            <th class="sort">ライセンスID</th>
+                            <th class="sort">ソフトウェアID</th>
+                            <th class="sort">開始日</th>
+                            <th class="sort">終了日</th>
+                            <th class="sort">予算ID</th>
+                            <th class="sort">端末ID</th>
+                            <th class="sort">アカウントID</th>
+                            <th class="sort">シリアルコード</th>
+                            <th class="sort">台数</th>
+                            <th class="sort">備考アップロード</th>
                             <th>編集</th>
                             <th>削除</th>
                         </tr>
@@ -81,12 +86,15 @@
                             <td><span wicket:id="accountName">022</span></td>
                             <td><span wicket:id="serialCode">serial</span></td>
                             <td><span wicket:id="licenseNumber">30</span></td>
-                            <td>2165455.pdf</td>
+                            <td><a wicket:id="licenseRemarksData">
+                                <span wicket:id="licenseRemarksName">2165455.pdf</span>
+                            </a></td>
                             <td><a href="#" wicket:id="toUpdateLicense">※</a></td>
                             <td><a href="#" wicket:id="toDeleteLicense">※</a></td>
                         </tr>
                         </tbody>
                     </table>
+                    <div id="pagination" class="pagination"></div> <!-- ページネーションの追加 -->
                     <plus href="#" wicket:id="toMakeLicense">＋</plus>
                 </div>
             </div>

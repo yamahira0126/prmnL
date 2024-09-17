@@ -33,12 +33,15 @@ public class DeleteLicense extends SelectLicense{
     private ITerminalService terminalService;
     @SpringBean
     private IAccountService accountService;
+    private FileUploadField fileUploadField;
+
 
     public DeleteLicense(License selectedLicense) {
 
         var softwareList = softwareService.findSoftwares(MySession.get().getAccount());
         var selectionSoftwareModel = LoadableDetachableModel.of(() -> softwareList);
         var selectedSoftwareModel = new Model<Software>();
+
         Optional<Software> softwareOpt = softwareList.stream()
                 .filter(software -> software.getSoftwareId().equals(selectedLicense.getSoftwareId())).findFirst();
         var software = softwareOpt.orElse(null);
@@ -87,6 +90,8 @@ public class DeleteLicense extends SelectLicense{
                 var accountId = selectedAccountModel.getObject().getAccountId();
                 var serialCode = serialCodeModel.getObject();
                 var licenseNumber = licenseNumberModel.getObject();
+                FileUpload upload = fileUploadField.getFileUpload();
+
 
                 var msg = "送信データ"
                         + softwareId
@@ -217,6 +222,7 @@ public class DeleteLicense extends SelectLicense{
         };
         licenseInfoForm.add(licenseNumberField);
 
-
+        fileUploadField = new FileUploadField("fileUpload");
+        licenseInfoForm.add(fileUploadField);
     }
 }
