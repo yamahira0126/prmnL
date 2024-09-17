@@ -103,13 +103,15 @@ public class UpdateAccount extends SelectAccount{
             protected void onInitialize() {
                 // このDropDownChoiceの初期化用の処理
                 super.onInitialize();
-//                // 必ず空欄の選択肢を用意するように設定
-//                setNullValid(true);
-                //登録されている課を初期値にする
-                var selectedSectionName = getChoices().stream()
-                        .findFirst()
-                        .orElse(null);
-                setModelObject(selectedSectionName);
+                //初期値設定
+                var selectSection = sectionService.findSectionById(selectedAccount.getAccountId()).getFirst().getSectionName();
+                Section firstSelectSection = null;
+                for(Section firstSection : selectionModel.getObject()){
+                    if(firstSection.getSectionName().equals(selectSection)){
+                        firstSelectSection = firstSection;
+                    }
+                }
+                setModelObject(firstSelectSection);
                 // 空欄の選択肢の送信を許可しないバリデーション
                 setRequired(true);
                 // エラーメッセージに表示する名前を設定

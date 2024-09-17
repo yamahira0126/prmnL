@@ -38,4 +38,15 @@ public class SectionRepository implements ISectionRepository{
         return sections;
     }
 
+    @Override
+    public List<Section> findSectionName(Integer selectedAccountId){
+        String sql = "select section_table.section_id, section_name"
+        + " from section_table"
+        + " left join account_section_table"
+        + " on section_table.section_id = account_section_table.section_id"
+        + " where account_section_exist =1 and account_id = ?";
+        List<Section> sections = jdbc.query(sql, DataClassRowMapper.newInstance(Section.class), selectedAccountId);
+        return sections;
+    }
+
 }

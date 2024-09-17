@@ -1,15 +1,11 @@
 package com.example.license.page.account;
 
 import com.example.license.data.Account;
-import com.example.license.data.Section;
 import com.example.license.service.IAccountService;
 import com.example.license.service.ISectionService;
-import org.apache.wicket.markup.html.form.ChoiceRenderer;
-import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
-import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
@@ -28,21 +24,14 @@ public class DeleteAccount extends SelectAccount{
         var accountNameModel = Model.of("");
         var accountPasswordModel = Model.of("");
         var accountMailAddressModel = Model.of("");
-        var selectionModel = LoadableDetachableModel.of(() -> sectionService.findSections());
-        var selectedModel = new Model<Section>();
-        var renderer = new ChoiceRenderer<>("sectionName");
-//        //プルダウンじゃないバージョン
-//        var accountSectionModel = Model.of("");
-
+        var accountSectionModel = Model.of("");
         var accountInfoForm = new Form<>("accountInfo") {
             @Override
             protected void onSubmit() {
                 var accountName = accountNameModel.getObject();
                 var accountPassword = accountPasswordModel.getObject();
                 var accountMailAddress = accountMailAddressModel.getObject();
-                var section = selectedModel.getObject();
-//                //プルダウンじゃないバージョン
-//                var accountSection = accountSectionModel.getObject();
+                var accountSection = accountSectionModel.getObject();
                 var msg = "送信データ"
                         + accountName
                         +","
@@ -50,9 +39,7 @@ public class DeleteAccount extends SelectAccount{
                         +","
                         + accountMailAddress
                         +","
-                        + section;
-//                        //プルダウンじゃないバージョン
-//                        + accountSection;
+                        + accountSection;
                 System.out.println(msg);
 
                 accountService.deleteAccount(selectedAccount.getAccountId());
@@ -103,33 +90,17 @@ public class DeleteAccount extends SelectAccount{
         };
         accountInfoForm.add(accountMailAddressField);
 
-        //プルダウン
-        var sectionSelection = new DropDownChoice<>("sectionName", selectedModel, selectionModel, renderer) {
+        var accountSectionField = new TextField<>("sectionName", accountSectionModel){
             @Override
             protected void onInitialize() {
-                // このDropDownChoiceの初期化用の処理
                 super.onInitialize();
-                // 必ず空欄の選択肢を用意するように設定
-                setNullValid(true);
-                // 空欄の選択肢の送信を許可しないバリデーション
+                var selectSection = sectionService.findSectionById(selectedAccount.getAccountId());
+                setModelObject(selectSection.getFirst().getSectionName());
                 setRequired(true);
-                // エラーメッセージに表示する名前を設定
                 setLabel(Model.of("課の選択肢"));
             }
         };
-        accountInfoForm.add(sectionSelection);
-
-//        //プルダウンじゃないバージョン
-//        var accountSectionField = new TextField<>("sectionName", accountSectionModel){
-//            @Override
-//            protected void onInitialize() {
-//                super.onInitialize();
-//                setModelObject(accountSectionModel.getObject());
-//                setRequired(true);
-//                setLabel(Model.of("アカウントパスワードの選択肢"));
-//            }
-//        };
-//        accountInfoForm.add(accountSectionField);
+        accountInfoForm.add(accountSectionField);
 
         var feedback = new FeedbackPanel("feedback");
         accountInfoForm.add(feedback);
